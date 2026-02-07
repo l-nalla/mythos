@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,262 +8,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <style>
-        :root {
-            --primary-gold: #FFD700;
-            --deep-purple: #1a0b2e;
-            --mystic-blue: #0f172a;
-            --sacred-red: #dc2626;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #050505;
-            color: #e5e5e5;
-            overflow-x: hidden;
-        }
-        
-        .font-mythology {
-            font-family: 'Cinzel', serif;
-        }
-        
-        .font-anime {
-            font-family: 'Noto Serif JP', serif;
-        }
-        
-        /* Particle Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
-            33% { transform: translateY(-100px) translateX(50px) scale(1.2); opacity: 0.6; }
-            66% { transform: translateY(50px) translateX(-30px) scale(0.8); opacity: 0.2; }
-        }
-        
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-        
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 215, 0, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.1);
-        }
-        
-        /* Anime Glow Effects */
-        .anime-glow {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .anime-glow::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #FFD700, #ff006e, #8338ec, #FFD700);
-            background-size: 400% 400%;
-            z-index: -1;
-            animation: glow 3s ease infinite;
-            border-radius: inherit;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .anime-glow:hover::before {
-            opacity: 1;
-        }
-        
-        @keyframes glow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Text Scramble Effect */
-        .scramble-text {
-            display: inline-block;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #FFD700, #ff006e);
-            border-radius: 4px;
-        }
-        
-        /* Music Player */
-        .music-player {
-            background: linear-gradient(135deg, rgba(26, 11, 46, 0.9), rgba(15, 23, 42, 0.9));
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .vinyl-spin {
-            animation: spin 4s linear infinite;
-            animation-play-state: paused;
-        }
-        
-        .vinyl-spin.playing {
-            animation-play-state: running;
-        }
-        
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Mythology Category Gradients */
-        .gradient-indian {
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD700 100%);
-        }
-        
-        .gradient-greek {
-            background: linear-gradient(135deg, #00C9FF 0%, #92FE9D 50%, #ffffff 100%);
-        }
-        
-        .gradient-norse {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
-        }
-        
-        .gradient-egyptian {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B35 100%);
-        }
-        
-        .gradient-japanese {
-            background: linear-gradient(135deg, #E63946 0%, #F1FAEE 50%, #A8DADC 100%);
-        }
-        
-        /* Instagram Grid */
-        .insta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .insta-card {
-            aspect-ratio: 1;
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .insta-card:hover {
-            transform: scale(1.02) rotate(1deg);
-            z-index: 10;
-            box-shadow: 0 25px 50px -12px rgba(255, 215, 0, 0.25);
-        }
-        
-        .insta-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .insta-card:hover .insta-overlay {
-            opacity: 1;
-        }
-        
-        /* Navigation */
-        .nav-link {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #FFD700, #ff006e);
-            transition: width 0.3s;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-        
-        .modal.active {
-            display: flex;
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Audio Visualizer Bars */
-        .visualizer-bar {
-            width: 4px;
-            background: linear-gradient(to top, #FFD700, #ff006e);
-            margin: 0 2px;
-            border-radius: 2px;
-            animation: visualize 0.5s ease-in-out infinite alternate;
-        }
-        
-        @keyframes visualize {
-            from { height: 10px; }
-            to { height: 40px; }
-        }
-        
-        .playing .visualizer-bar {
-            animation-play-state: running;
-        }
-        
-        .paused .visualizer-bar {
-            animation-play-state: paused;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="antialiased">
 
     <!-- Particle Background -->
@@ -273,22 +26,29 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-purple-600 flex items-center justify-center">
+                    <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-purple-600 flex items-center justify-center">
                         <span class="text-2xl">⚡</span>
                     </div>
-                    <span class="font-mythology text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-purple-400 to-pink-400">
+                    <span
+                        class="font-mythology text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-purple-400 to-pink-400">
                         MYTHOS
                     </span>
                 </div>
-                
+
                 <div class="hidden md:flex space-x-8">
-                    <a href="#stories" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Stories</a>
-                    <a href="#instagram" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Visuals</a>
-                    <a href="#music" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Soundscape</a>
-                    <a href="#about" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">About</a>
+                    <a href="#stories"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Stories</a>
+                    <a href="#instagram"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Visuals</a>
+                    <a href="#music"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Soundscape</a>
+                    <a href="#about"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">About</a>
                 </div>
 
-                <button onclick="toggleMusicPlayer()" class="glass-card px-4 py-2 rounded-full flex items-center space-x-2 hover:scale-105 transition-transform">
+                <button onclick="toggleMusicPlayer()"
+                    class="glass-card px-4 py-2 rounded-full flex items-center space-x-2 hover:scale-105 transition-transform">
                     <span class="text-yellow-400">♪</span>
                     <span class="text-xs uppercase tracking-wider">Music</span>
                 </button>
@@ -300,36 +60,43 @@
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black"></div>
-            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1920&q=80')] bg-cover bg-center opacity-30 mix-blend-overlay"></div>
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1920&q=80')] bg-cover bg-center opacity-30 mix-blend-overlay">
+            </div>
         </div>
 
         <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
             <div class="mb-6 inline-block">
-                <span class="px-4 py-1 rounded-full border border-yellow-400/30 text-yellow-400 text-xs uppercase tracking-[0.3em] bg-yellow-400/5">
+                <span
+                    class="px-4 py-1 rounded-full border border-yellow-400/30 text-yellow-400 text-xs uppercase tracking-[0.3em] bg-yellow-400/5">
                     Ancient Legends Reimagined
                 </span>
             </div>
-            
+
             <h1 class="font-mythology text-6xl md:text-8xl lg:text-9xl font-bold mb-6 leading-tight">
-                <span class="block scramble-text text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">MYTHOS</span>
-                <span class="block text-2xl md:text-4xl font-anime mt-4 text-gray-400 tracking-[0.5em] opacity-0 translate-y-10" id="subtitle">
+                <span
+                    class="block scramble-text text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">MYTHOS</span>
+                <span
+                    class="block text-2xl md:text-4xl font-anime mt-4 text-gray-400 tracking-[0.5em] opacity-0 translate-y-10"
+                    id="subtitle">
                     神話の再来
                 </span>
             </h1>
-            
-            <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-300 mb-12 leading-relaxed opacity-0" id="hero-text">
-                Journey through the epic tales of Mahabharata, Greek mythology, Norse legends, and beyond. 
+
+            <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-300 mb-12 leading-relaxed opacity-0"
+                id="hero-text">
+                Journey through the epic tales of Mahabharata, Greek mythology, Norse legends, and beyond.
                 Experience ancient stories through the lens of modern anime aesthetics.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0" id="hero-cta">
-                <button onclick="document.getElementById('stories').scrollIntoView({behavior: 'smooth'})" 
+                <button onclick="document.getElementById('stories').scrollIntoView({behavior: 'smooth'})"
                     class="group relative px-8 py-4 bg-gradient-to-r from-yellow-600 to-yellow-400 rounded-full font-semibold text-black overflow-hidden transition-transform hover:scale-105">
                     <span class="relative z-10">Explore Stories</span>
                     <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </button>
-                
-                <button onclick="document.getElementById('music').scrollIntoView({behavior: 'smooth'})" 
+
+                <button onclick="document.getElementById('music').scrollIntoView({behavior: 'smooth'})"
                     class="px-8 py-4 glass-card rounded-full font-semibold hover:border-yellow-400/50 transition-all flex items-center gap-2">
                     <span>🎵</span> Soundtrack
                 </button>
@@ -338,7 +105,8 @@
 
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
             <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
             </svg>
         </div>
     </section>
@@ -347,7 +115,8 @@
     <section id="stories" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="font-mythology text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-400">
+                <h2
+                    class="font-mythology text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-400">
                     Sacred Pantheons
                 </h2>
                 <p class="text-gray-400 max-w-2xl mx-auto">Choose your path through the ancient realms</p>
@@ -355,18 +124,21 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="mythology-grid">
                 <!-- Indian Mythology -->
-                <div class="mythology-card group cursor-pointer" onclick="filterStories('indian')">
+                <div class="mythology-card group cursor-pointer" onclick="window.location.href='indian_epics.html'">
                     <div class="glass-card rounded-2xl p-1 h-full relative overflow-hidden anime-glow">
-                        <div class="absolute inset-0 gradient-indian opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                        <div
+                            class="absolute inset-0 gradient-indian opacity-20 group-hover:opacity-30 transition-opacity">
+                        </div>
                         <div class="relative p-8 h-full flex flex-col">
                             <div class="text-5xl mb-4">🏹</div>
                             <h3 class="font-mythology text-2xl font-bold mb-2 text-orange-400">Indian Epics</h3>
                             <p class="text-sm text-gray-400 mb-4 font-anime">マハーバーラタ</p>
                             <p class="text-gray-300 text-sm leading-relaxed flex-grow">
-                                The Mahabharata, Ramayana, and tales of Shiva, Vishnu, and Devi. 
+                                The Mahabharata, Ramayana, and tales of Shiva, Vishnu, and Devi.
                                 Stories of dharma, duty, and divine intervention.
                             </p>
-                            <div class="mt-6 flex items-center text-orange-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
+                            <div
+                                class="mt-6 flex items-center text-orange-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
                                 Explore <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -374,18 +146,21 @@
                 </div>
 
                 <!-- Greek Mythology -->
-                <div class="mythology-card group cursor-pointer" onclick="filterStories('greek')">
+                <div class="mythology-card group cursor-pointer" onclick="window.location.href='greek_mythology.html'">
                     <div class="glass-card rounded-2xl p-1 h-full relative overflow-hidden anime-glow">
-                        <div class="absolute inset-0 gradient-greek opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                        <div
+                            class="absolute inset-0 gradient-greek opacity-20 group-hover:opacity-30 transition-opacity">
+                        </div>
                         <div class="relative p-8 h-full flex flex-col">
                             <div class="text-5xl mb-4">⚡</div>
                             <h3 class="font-mythology text-2xl font-bold mb-2 text-cyan-400">Greek Mythology</h3>
                             <p class="text-sm text-gray-400 mb-4 font-anime">ギリシャ神話</p>
                             <p class="text-gray-300 text-sm leading-relaxed flex-grow">
-                                Olympus, Titans, Heroes, and Tragedies. From Zeus's thunderbolts 
+                                Olympus, Titans, Heroes, and Tragedies. From Zeus's thunderbolts
                                 to the depths of Hades and the trials of Hercules.
                             </p>
-                            <div class="mt-6 flex items-center text-cyan-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
+                            <div
+                                class="mt-6 flex items-center text-cyan-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
                                 Explore <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -393,18 +168,21 @@
                 </div>
 
                 <!-- Norse Mythology -->
-                <div class="mythology-card group cursor-pointer" onclick="filterStories('norse')">
+                <div class="mythology-card group cursor-pointer" onclick="window.location.href='norse_legends.html'">
                     <div class="glass-card rounded-2xl p-1 h-full relative overflow-hidden anime-glow">
-                        <div class="absolute inset-0 gradient-norse opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                        <div
+                            class="absolute inset-0 gradient-norse opacity-20 group-hover:opacity-30 transition-opacity">
+                        </div>
                         <div class="relative p-8 h-full flex flex-col">
                             <div class="text-5xl mb-4">🪓</div>
                             <h3 class="font-mythology text-2xl font-bold mb-2 text-blue-400">Norse Legends</h3>
                             <p class="text-sm text-gray-400 mb-4 font-anime">北欧神話</p>
                             <p class="text-gray-300 text-sm leading-relaxed flex-grow">
-                                Asgard, Midgard, and the Nine Realms. Thor's hammer, Odin's wisdom, 
+                                Asgard, Midgard, and the Nine Realms. Thor's hammer, Odin's wisdom,
                                 and the inevitable Ragnarök.
                             </p>
-                            <div class="mt-6 flex items-center text-blue-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
+                            <div
+                                class="mt-6 flex items-center text-blue-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
                                 Explore <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -412,18 +190,21 @@
                 </div>
 
                 <!-- Egyptian Mythology -->
-                <div class="mythology-card group cursor-pointer" onclick="filterStories('egyptian')">
+                <div class="mythology-card group cursor-pointer" onclick="window.location.href='egyptian_myths.html'">
                     <div class="glass-card rounded-2xl p-1 h-full relative overflow-hidden anime-glow">
-                        <div class="absolute inset-0 gradient-egyptian opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                        <div
+                            class="absolute inset-0 gradient-egyptian opacity-20 group-hover:opacity-30 transition-opacity">
+                        </div>
                         <div class="relative p-8 h-full flex flex-col">
                             <div class="text-5xl mb-4">👁️</div>
                             <h3 class="font-mythology text-2xl font-bold mb-2 text-yellow-400">Egyptian Myths</h3>
                             <p class="text-sm text-gray-400 mb-4 font-anime">エジプト神話</p>
                             <p class="text-gray-300 text-sm leading-relaxed flex-grow">
-                                Ra's solar barque, Anubis's judgment, Isis's magic. 
+                                Ra's solar barque, Anubis's judgment, Isis's magic.
                                 The eternal struggle between order (Ma'at) and chaos.
                             </p>
-                            <div class="mt-6 flex items-center text-yellow-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
+                            <div
+                                class="mt-6 flex items-center text-yellow-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
                                 Explore <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -431,18 +212,21 @@
                 </div>
 
                 <!-- Japanese Mythology -->
-                <div class="mythology-card group cursor-pointer" onclick="filterStories('japanese')">
+                <div class="mythology-card group cursor-pointer" onclick="window.location.href='japanese_mythos.html'">
                     <div class="glass-card rounded-2xl p-1 h-full relative overflow-hidden anime-glow">
-                        <div class="absolute inset-0 gradient-japanese opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                        <div
+                            class="absolute inset-0 gradient-japanese opacity-20 group-hover:opacity-30 transition-opacity">
+                        </div>
                         <div class="relative p-8 h-full flex flex-col">
                             <div class="text-5xl mb-4">⛩️</div>
                             <h3 class="font-mythology text-2xl font-bold mb-2 text-red-400">Japanese Myths</h3>
                             <p class="text-sm text-gray-400 mb-4 font-anime">日本神話</p>
                             <p class="text-gray-300 text-sm leading-relaxed flex-grow">
-                                Amaterasu's light, Susanoo's storms, and the creation of the islands. 
+                                Amaterasu's light, Susanoo's storms, and the creation of the islands.
                                 Kami spirits and yokai folklore.
                             </p>
-                            <div class="mt-6 flex items-center text-red-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
+                            <div
+                                class="mt-6 flex items-center text-red-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
                                 Explore <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -452,16 +236,19 @@
                 <!-- Celtic Mythology -->
                 <div class="mythology-card group cursor-pointer" onclick="filterStories('celtic')">
                     <div class="glass-card rounded-2xl p-1 h-full relative overflow-hidden anime-glow">
-                        <div class="absolute inset-0 bg-gradient-to-br from-green-600 to-emerald-400 opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-green-600 to-emerald-400 opacity-20 group-hover:opacity-30 transition-opacity">
+                        </div>
                         <div class="relative p-8 h-full flex flex-col">
                             <div class="text-5xl mb-4">🍃</div>
                             <h3 class="font-mythology text-2xl font-bold mb-2 text-emerald-400">Celtic Tales</h3>
                             <p class="text-sm text-gray-400 mb-4 font-anime">ケルト神話</p>
                             <p class="text-gray-300 text-sm leading-relaxed flex-grow">
-                                Tuatha Dé Danann, druids, and the Otherworld. 
+                                Tuatha Dé Danann, druids, and the Otherworld.
                                 Cú Chulainn's rage and the Morrigan's prophecy.
                             </p>
-                            <div class="mt-6 flex items-center text-emerald-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
+                            <div
+                                class="mt-6 flex items-center text-emerald-400 text-sm font-semibold group-hover:translate-x-2 transition-transform">
                                 Explore <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -480,9 +267,15 @@
                     <p class="text-gray-400">Short-form mythology blogs with anime aesthetics</p>
                 </div>
                 <div class="flex gap-2">
-                    <button onclick="filterStories('all')" class="px-4 py-2 rounded-full glass-card text-sm hover:bg-white/10 transition-colors active-filter" id="filter-all">All</button>
-                    <button onclick="filterStories('indian')" class="px-4 py-2 rounded-full glass-card text-sm hover:bg-white/10 transition-colors" id="filter-indian">Indian</button>
-                    <button onclick="filterStories('greek')" class="px-4 py-2 rounded-full glass-card text-sm hover:bg-white/10 transition-colors" id="filter-greek">Greek</button>
+                    <button onclick="filterStories('all')"
+                        class="px-4 py-2 rounded-full glass-card text-sm hover:bg-white/10 transition-colors active-filter"
+                        id="filter-all">All</button>
+                    <button onclick="filterStories('indian')"
+                        class="px-4 py-2 rounded-full glass-card text-sm hover:bg-white/10 transition-colors"
+                        id="filter-indian">Indian</button>
+                    <button onclick="filterStories('greek')"
+                        class="px-4 py-2 rounded-full glass-card text-sm hover:bg-white/10 transition-colors"
+                        id="filter-greek">Greek</button>
                 </div>
             </div>
 
@@ -492,11 +285,12 @@
                     <div class="glass-card rounded-2xl overflow-hidden h-full flex flex-col">
                         <div class="h-48 overflow-hidden relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=800&q=80" 
-                                alt="Krishna and Arjuna" 
+                            <img src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=800&q=80"
+                                alt="Krishna and Arjuna"
                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 right-4 z-20">
-                                <span class="px-3 py-1 bg-orange-500/20 border border-orange-500/50 rounded-full text-xs text-orange-300">Indian</span>
+                                <span
+                                    class="px-3 py-1 bg-orange-500/20 border border-orange-500/50 rounded-full text-xs text-orange-300">Indian</span>
                             </div>
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
@@ -505,18 +299,22 @@
                                 <span>•</span>
                                 <span class="text-yellow-400">☀️ Morning Read</span>
                             </div>
-                            <h3 class="font-mythology text-xl font-bold mb-2 group-hover:text-yellow-400 transition-colors">
+                            <h3
+                                class="font-mythology text-xl font-bold mb-2 group-hover:text-yellow-400 transition-colors">
                                 The Bhagavad Gita: Warrior's Dilemma
                             </h3>
                             <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
-                                On the battlefield of Kurukshetra, Prince Arjuna faces his cousins, teachers, and friends. 
+                                On the battlefield of Kurukshetra, Prince Arjuna faces his cousins, teachers, and
+                                friends.
                                 Krishna reveals the eternal wisdom of duty over despair...
                             </p>
                             <div class="flex items-center justify-between pt-4 border-t border-white/10">
-                                <button onclick="playStoryMusic('indian')" class="text-xs flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors">
+                                <button onclick="playStoryMusic('indian')"
+                                    class="text-xs flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors">
                                     <span class="text-lg">🎵</span> Suggested: Raag Bhairavi
                                 </button>
-                                <button onclick="openStory('gita')" class="text-yellow-400 hover:translate-x-1 transition-transform">Read →</button>
+                                <button onclick="openStory('gita')"
+                                    class="text-yellow-400 hover:translate-x-1 transition-transform">Read →</button>
                             </div>
                         </div>
                     </div>
@@ -527,11 +325,12 @@
                     <div class="glass-card rounded-2xl overflow-hidden h-full flex flex-col">
                         <div class="h-48 overflow-hidden relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80" 
-                                alt="Persephone" 
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80"
+                                alt="Persephone"
                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 right-4 z-20">
-                                <span class="px-3 py-1 bg-cyan-500/20 border border-cyan-500/50 rounded-full text-xs text-cyan-300">Greek</span>
+                                <span
+                                    class="px-3 py-1 bg-cyan-500/20 border border-cyan-500/50 rounded-full text-xs text-cyan-300">Greek</span>
                             </div>
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
@@ -540,18 +339,21 @@
                                 <span>•</span>
                                 <span class="text-purple-400">🌙 Evening Tale</span>
                             </div>
-                            <h3 class="font-mythology text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">
+                            <h3
+                                class="font-mythology text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">
                                 Persephone & The Pomegranate
                             </h3>
                             <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
-                                The maiden of spring, stolen by Hades to be Queen of the Underworld. 
+                                The maiden of spring, stolen by Hades to be Queen of the Underworld.
                                 Six seeds that changed the seasons forever...
                             </p>
                             <div class="flex items-center justify-between pt-4 border-t border-white/10">
-                                <button onclick="playStoryMusic('greek')" class="text-xs flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors">
+                                <button onclick="playStoryMusic('greek')"
+                                    class="text-xs flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors">
                                     <span class="text-lg">🎵</span> Suggested: Lyre of Olympus
                                 </button>
-                                <button onclick="openStory('persephone')" class="text-cyan-400 hover:translate-x-1 transition-transform">Read →</button>
+                                <button onclick="openStory('persephone')"
+                                    class="text-cyan-400 hover:translate-x-1 transition-transform">Read →</button>
                             </div>
                         </div>
                     </div>
@@ -562,11 +364,12 @@
                     <div class="glass-card rounded-2xl overflow-hidden h-full flex flex-col">
                         <div class="h-48 overflow-hidden relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?w=800&q=80" 
-                                alt="Ragnarok" 
+                            <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?w=800&q=80"
+                                alt="Ragnarok"
                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 right-4 z-20">
-                                <span class="px-3 py-1 bg-blue-500/20 border border-blue-500/50 rounded-full text-xs text-blue-300">Norse</span>
+                                <span
+                                    class="px-3 py-1 bg-blue-500/20 border border-blue-500/50 rounded-full text-xs text-blue-300">Norse</span>
                             </div>
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
@@ -575,18 +378,21 @@
                                 <span>•</span>
                                 <span class="text-red-400">⚔️ Epic Battle</span>
                             </div>
-                            <h3 class="font-mythology text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">
+                            <h3
+                                class="font-mythology text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">
                                 Twilight of the Gods: Ragnarök
                             </h3>
                             <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
-                                The wolf Skoll devours the sun. Jormungandr rises from the depths. 
+                                The wolf Skoll devours the sun. Jormungandr rises from the depths.
                                 Odin rides to his final battle as the world burns...
                             </p>
                             <div class="flex items-center justify-between pt-4 border-t border-white/10">
-                                <button onclick="playStoryMusic('norse')" class="text-xs flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                                <button onclick="playStoryMusic('norse')"
+                                    class="text-xs flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
                                     <span class="text-lg">🎵</span> Suggested: Wardruna Style
                                 </button>
-                                <button onclick="openStory('ragnarok')" class="text-blue-400 hover:translate-x-1 transition-transform">Read →</button>
+                                <button onclick="openStory('ragnarok')"
+                                    class="text-blue-400 hover:translate-x-1 transition-transform">Read →</button>
                             </div>
                         </div>
                     </div>
@@ -597,11 +403,12 @@
                     <div class="glass-card rounded-2xl overflow-hidden h-full flex flex-col">
                         <div class="h-48 overflow-hidden relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80" 
-                                alt="Amaterasu" 
+                            <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80"
+                                alt="Amaterasu"
                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 right-4 z-20">
-                                <span class="px-3 py-1 bg-red-500/20 border border-red-500/50 rounded-full text-xs text-red-300">Japanese</span>
+                                <span
+                                    class="px-3 py-1 bg-red-500/20 border border-red-500/50 rounded-full text-xs text-red-300">Japanese</span>
                             </div>
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
@@ -610,18 +417,21 @@
                                 <span>•</span>
                                 <span class="text-yellow-400">☀️ Sun Goddess</span>
                             </div>
-                            <h3 class="font-mythology text-xl font-bold mb-2 group-hover:text-red-400 transition-colors">
+                            <h3
+                                class="font-mythology text-xl font-bold mb-2 group-hover:text-red-400 transition-colors">
                                 Amaterasu & The Heavenly Cave
                             </h3>
                             <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
-                                When the Sun Goddess hides in Ama-no-Iwato, the world plunges into darkness. 
+                                When the Sun Goddess hides in Ama-no-Iwato, the world plunges into darkness.
                                 The gods devise a plan to lure her out with a mirror and dance...
                             </p>
                             <div class="flex items-center justify-between pt-4 border-t border-white/10">
-                                <button onclick="playStoryMusic('japanese')" class="text-xs flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors">
+                                <button onclick="playStoryMusic('japanese')"
+                                    class="text-xs flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors">
                                     <span class="text-lg">🎵</span> Suggested: Koto & Shakuhachi
                                 </button>
-                                <button onclick="openStory('amaterasu')" class="text-red-400 hover:translate-x-1 transition-transform">Read →</button>
+                                <button onclick="openStory('amaterasu')"
+                                    class="text-red-400 hover:translate-x-1 transition-transform">Read →</button>
                             </div>
                         </div>
                     </div>
@@ -632,11 +442,12 @@
                     <div class="glass-card rounded-2xl overflow-hidden h-full flex flex-col">
                         <div class="h-48 overflow-hidden relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80" 
-                                alt="Osiris" 
+                            <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80"
+                                alt="Osiris"
                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 right-4 z-20">
-                                <span class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/50 rounded-full text-xs text-yellow-300">Egyptian</span>
+                                <span
+                                    class="px-3 py-1 bg-yellow-500/20 border border-yellow-500/50 rounded-full text-xs text-yellow-300">Egyptian</span>
                             </div>
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
@@ -645,18 +456,21 @@
                                 <span>•</span>
                                 <span class="text-green-400">🌿 Resurrection</span>
                             </div>
-                            <h3 class="font-mythology text-xl font-bold mb-2 group-hover:text-yellow-400 transition-colors">
+                            <h3
+                                class="font-mythology text-xl font-bold mb-2 group-hover:text-yellow-400 transition-colors">
                                 Osiris: Lord of the Resurrection
                             </h3>
                             <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
-                                Betrayed by Set, dismembered and scattered across Egypt. 
+                                Betrayed by Set, dismembered and scattered across Egypt.
                                 Isis gathers the pieces, and the first mummy brings the gift of afterlife...
                             </p>
                             <div class="flex items-center justify-between pt-4 border-t border-white/10">
-                                <button onclick="playStoryMusic('egyptian')" class="text-xs flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors">
+                                <button onclick="playStoryMusic('egyptian')"
+                                    class="text-xs flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors">
                                     <span class="text-lg">🎵</span> Suggested: Ney Flute
                                 </button>
-                                <button onclick="openStory('osiris')" class="text-yellow-400 hover:translate-x-1 transition-transform">Read →</button>
+                                <button onclick="openStory('osiris')"
+                                    class="text-yellow-400 hover:translate-x-1 transition-transform">Read →</button>
                             </div>
                         </div>
                     </div>
@@ -667,11 +481,12 @@
                     <div class="glass-card rounded-2xl overflow-hidden h-full flex flex-col">
                         <div class="h-48 overflow-hidden relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80" 
-                                alt="Celtic Warrior" 
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80"
+                                alt="Celtic Warrior"
                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute top-4 right-4 z-20">
-                                <span class="px-3 py-1 bg-emerald-500/20 border border-emerald-500/50 rounded-full text-xs text-emerald-300">Celtic</span>
+                                <span
+                                    class="px-3 py-1 bg-emerald-500/20 border border-emerald-500/50 rounded-full text-xs text-emerald-300">Celtic</span>
                             </div>
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
@@ -680,18 +495,21 @@
                                 <span>•</span>
                                 <span class="text-red-400">🔥 Battle Fury</span>
                             </div>
-                            <h3 class="font-mythology text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">
+                            <h3
+                                class="font-mythology text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">
                                 Cú Chulainn: The Hound of Ulster
                             </h3>
                             <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
-                                The boy who took up arms too soon. When his battle-fury (ríastrad) takes over, 
+                                The boy who took up arms too soon. When his battle-fury (ríastrad) takes over,
                                 his body twists into an unrecognizable monster of war...
                             </p>
                             <div class="flex items-center justify-between pt-4 border-t border-white/10">
-                                <button onclick="playStoryMusic('celtic')" class="text-xs flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors">
+                                <button onclick="playStoryMusic('celtic')"
+                                    class="text-xs flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors">
                                     <span class="text-lg">🎵</span> Suggested: Celtic Folk
                                 </button>
-                                <button onclick="openStory('cuchulainn')" class="text-emerald-400 hover:translate-x-1 transition-transform">Read →</button>
+                                <button onclick="openStory('cuchulainn')"
+                                    class="text-emerald-400 hover:translate-x-1 transition-transform">Read →</button>
                             </div>
                         </div>
                     </div>
@@ -707,21 +525,31 @@
             <div class="text-center mb-16">
                 <h2 class="font-mythology text-4xl md:text-5xl font-bold mb-4">Visual Chronicles</h2>
                 <p class="text-gray-400 mb-8">Instagram-ready mythology art with anime aesthetics</p>
-                
+
                 <div class="flex justify-center gap-4 flex-wrap">
-                    <button onclick="filterInsta('all')" class="insta-filter px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 transition-all active" data-filter="all">All</button>
-                    <button onclick="filterInsta('quotes')" class="insta-filter px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 transition-all" data-filter="quotes">Quotes</button>
-                    <button onclick="filterInsta('characters')" class="insta-filter px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 transition-all" data-filter="characters">Characters</button>
-                    <button onclick="filterInsta('scenes')" class="insta-filter px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 transition-all" data-filter="scenes">Scenes</button>
+                    <button onclick="filterInsta('all')"
+                        class="insta-filter px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 transition-all active"
+                        data-filter="all">All</button>
+                    <button onclick="filterInsta('quotes')"
+                        class="insta-filter px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 transition-all"
+                        data-filter="quotes">Quotes</button>
+                    <button onclick="filterInsta('characters')"
+                        class="insta-filter px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 transition-all"
+                        data-filter="characters">Characters</button>
+                    <button onclick="filterInsta('scenes')"
+                        class="insta-filter px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-400/50 transition-all"
+                        data-filter="scenes">Scenes</button>
                 </div>
             </div>
 
             <div class="insta-grid" id="insta-grid">
                 <!-- Post 1 -->
                 <div class="insta-card insta-item" data-type="quotes" onclick="openInstaModal(1)">
-                    <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=600&q=80" class="w-full h-full object-cover" alt="Mythology Quote">
+                    <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Mythology Quote">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
-                        <p class="font-mythology text-lg font-bold text-white mb-2">"I am Time, the destroyer of all..."</p>
+                        <p class="font-mythology text-lg font-bold text-white mb-2">"I am Time, the destroyer of all..."
+                        </p>
                         <p class="text-xs text-gray-300">Bhagavad Gita • Krishna</p>
                         <div class="flex gap-4 mt-4 text-white/80 text-sm">
                             <span>♥ 2.4k</span>
@@ -733,7 +561,8 @@
 
                 <!-- Post 2 -->
                 <div class="insta-card insta-item" data-type="characters" onclick="openInstaModal(2)">
-                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80" class="w-full h-full object-cover" alt="Zeus">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Zeus">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
                         <p class="font-mythology text-lg font-bold text-white mb-2">Zeus, King of Olympus</p>
                         <p class="text-xs text-gray-300">Greek Mythology • Thunderer</p>
@@ -742,12 +571,14 @@
                             <span>💬 156</span>
                         </div>
                     </div>
-                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur px-2 py-1 rounded text-xs">Character</div>
+                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur px-2 py-1 rounded text-xs">Character
+                    </div>
                 </div>
 
                 <!-- Post 3 -->
                 <div class="insta-card insta-item" data-type="scenes" onclick="openInstaModal(3)">
-                    <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?w=600&q=80" class="w-full h-full object-cover" alt="Valhalla">
+                    <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Valhalla">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
                         <p class="font-mythology text-lg font-bold text-white mb-2">The Halls of Valhalla</p>
                         <p class="text-xs text-gray-300">Norse Mythology • Warriors' Paradise</p>
@@ -761,7 +592,8 @@
 
                 <!-- Post 4 -->
                 <div class="insta-card insta-item" data-type="quotes" onclick="openInstaModal(4)">
-                    <img src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=600&q=80" class="w-full h-full object-cover" alt="Dharma Quote">
+                    <img src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Dharma Quote">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
                         <p class="font-mythology text-lg font-bold text-white mb-2">"Better is one's own duty..."</p>
                         <p class="text-xs text-gray-300">Bhagavad Gita • Dharma</p>
@@ -775,7 +607,8 @@
 
                 <!-- Post 5 -->
                 <div class="insta-card insta-item" data-type="characters" onclick="openInstaModal(5)">
-                    <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=600&q=80" class="w-full h-full object-cover" alt="Anubis">
+                    <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Anubis">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
                         <p class="font-mythology text-lg font-bold text-white mb-2">Anubis, Guardian of Scales</p>
                         <p class="text-xs text-gray-300">Egyptian Mythology • Death</p>
@@ -784,12 +617,14 @@
                             <span>💬 112</span>
                         </div>
                     </div>
-                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur px-2 py-1 rounded text-xs">Character</div>
+                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur px-2 py-1 rounded text-xs">Character
+                    </div>
                 </div>
 
                 <!-- Post 6 -->
                 <div class="insta-card insta-item" data-type="scenes" onclick="openInstaModal(6)">
-                    <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" class="w-full h-full object-cover" alt="Torii Gate">
+                    <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Torii Gate">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
                         <p class="font-mythology text-lg font-bold text-white mb-2">The Floating Torii</p>
                         <p class="text-xs text-gray-300">Japanese Mythology • Miyajima</p>
@@ -803,7 +638,8 @@
 
                 <!-- Post 7 -->
                 <div class="insta-card insta-item" data-type="quotes" onclick="openInstaModal(7)">
-                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80" class="w-full h-full object-cover" alt="Greek Quote">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Greek Quote">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
                         <p class="font-mythology text-lg font-bold text-white mb-2">"Know thyself..."</p>
                         <p class="text-xs text-gray-300">Delphi Oracle • Wisdom</p>
@@ -817,7 +653,8 @@
 
                 <!-- Post 8 -->
                 <div class="insta-card insta-item" data-type="characters" onclick="openInstaModal(8)">
-                    <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?w=600&q=80" class="w-full h-full object-cover" alt="Thor">
+                    <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Thor">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
                         <p class="font-mythology text-lg font-bold text-white mb-2">Thor, Protector of Midgard</p>
                         <p class="text-xs text-gray-300">Norse Mythology • Thunder</p>
@@ -826,12 +663,14 @@
                             <span>💬 98</span>
                         </div>
                     </div>
-                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur px-2 py-1 rounded text-xs">Character</div>
+                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur px-2 py-1 rounded text-xs">Character
+                    </div>
                 </div>
 
                 <!-- Post 9 -->
                 <div class="insta-card insta-item" data-type="scenes" onclick="openInstaModal(9)">
-                    <img src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=600&q=80" class="w-full h-full object-cover" alt="Kurukshetra">
+                    <img src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=600&q=80"
+                        class="w-full h-full object-cover" alt="Kurukshetra">
                     <div class="insta-overlay absolute inset-0 flex flex-col justify-end p-6">
                         <p class="font-mythology text-lg font-bold text-white mb-2">The Field of Dharma</p>
                         <p class="text-xs text-gray-300">Mahabharata • Kurukshetra</p>
@@ -856,24 +695,30 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Indian Music -->
-                <div class="music-card glass-card rounded-2xl p-6 cursor-pointer hover:border-orange-500/50 transition-all group" onclick="selectPlaylist('indian')">
+                <div class="music-card glass-card rounded-2xl p-6 cursor-pointer hover:border-orange-500/50 transition-all group"
+                    onclick="selectPlaylist('indian')">
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="w-16 h-16 rounded-full gradient-indian flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🪕</div>
+                        <div
+                            class="w-16 h-16 rounded-full gradient-indian flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            🪕</div>
                         <div>
                             <h3 class="font-mythology text-xl font-bold text-orange-400">Vedic Vibrations</h3>
                             <p class="text-xs text-gray-500">Sitar, Tabla, Bansuri</p>
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-orange-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('raag-bhairavi')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-orange-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('raag-bhairavi')">
                             <span>Raag Bhairavi</span>
                             <span>8:24</span>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-orange-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('om-namah')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-orange-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('om-namah')">
                             <span>Om Namah Shivaya</span>
                             <span>12:15</span>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 py-2 hover:text-orange-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('krishna-flute')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 hover:text-orange-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('krishna-flute')">
                             <span>Krishna's Flute</span>
                             <span>6:42</span>
                         </div>
@@ -881,24 +726,30 @@
                 </div>
 
                 <!-- Greek Music -->
-                <div class="music-card glass-card rounded-2xl p-6 cursor-pointer hover:border-cyan-500/50 transition-all group" onclick="selectPlaylist('greek')">
+                <div class="music-card glass-card rounded-2xl p-6 cursor-pointer hover:border-cyan-500/50 transition-all group"
+                    onclick="selectPlaylist('greek')">
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="w-16 h-16 rounded-full gradient-greek flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🏛️</div>
+                        <div
+                            class="w-16 h-16 rounded-full gradient-greek flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            🏛️</div>
                         <div>
                             <h3 class="font-mythology text-xl font-bold text-cyan-400">Olympian Harmonies</h3>
                             <p class="text-xs text-gray-500">Lyre, Aulos, Kithara</p>
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-cyan-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('apollo-lyre')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-cyan-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('apollo-lyre')">
                             <span>Apollo's Lyre</span>
                             <span>7:18</span>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-cyan-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('dionysus-rhythm')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-cyan-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('dionysus-rhythm')">
                             <span>Dionysus Rhythm</span>
                             <span>9:45</span>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 py-2 hover:text-cyan-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('oracle-whispers')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 hover:text-cyan-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('oracle-whispers')">
                             <span>Oracle Whispers</span>
                             <span>5:33</span>
                         </div>
@@ -906,24 +757,30 @@
                 </div>
 
                 <!-- Norse Music -->
-                <div class="music-card glass-card rounded-2xl p-6 cursor-pointer hover:border-blue-500/50 transition-all group" onclick="selectPlaylist('norse')">
+                <div class="music-card glass-card rounded-2xl p-6 cursor-pointer hover:border-blue-500/50 transition-all group"
+                    onclick="selectPlaylist('norse')">
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="w-16 h-16 rounded-full gradient-norse flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🎻</div>
+                        <div
+                            class="w-16 h-16 rounded-full gradient-norse flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            🎻</div>
                         <div>
                             <h3 class="font-mythology text-xl font-bold text-blue-400">Nordic Runes</h3>
                             <p class="text-xs text-gray-500">Tagelharpa, Nyckelharpa, Drums</p>
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-blue-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('valhalla-calling')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-blue-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('valhalla-calling')">
                             <span>Valhalla Calling</span>
                             <span>11:20</span>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-blue-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('wardruna-style')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-blue-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('wardruna-style')">
                             <span>Wardruna Style</span>
                             <span>8:45</span>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 py-2 hover:text-blue-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('winter-is-coming')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 hover:text-blue-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('winter-is-coming')">
                             <span>Winter is Coming</span>
                             <span>10:12</span>
                         </div>
@@ -931,24 +788,30 @@
                 </div>
 
                 <!-- Japanese Music -->
-                <div class="music-card glass-card rounded-2xl p-6 cursor-pointer hover:border-red-500/50 transition-all group" onclick="selectPlaylist('japanese')">
+                <div class="music-card glass-card rounded-2xl p-6 cursor-pointer hover:border-red-500/50 transition-all group"
+                    onclick="selectPlaylist('japanese')">
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="w-16 h-16 rounded-full gradient-japanese flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🎋</div>
+                        <div
+                            class="w-16 h-16 rounded-full gradient-japanese flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            🎋</div>
                         <div>
                             <h3 class="font-mythology text-xl font-bold text-red-400">Sakura Dreams</h3>
                             <p class="text-xs text-gray-500">Koto, Shakuhachi, Shamisen</p>
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-red-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('sakura-koto')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-red-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('sakura-koto')">
                             <span>Sakura Koto</span>
                             <span>6:50</span>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-red-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('shakuhachi-meditation')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 border-b border-white/5 hover:text-red-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('shakuhachi-meditation')">
                             <span>Shakuhachi Meditation</span>
                             <span>15:00</span>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 py-2 hover:text-red-400 transition-colors cursor-pointer" onclick="event.stopPropagation(); playTrack('taiko-drums')">
+                        <div class="flex justify-between text-sm text-gray-400 py-2 hover:text-red-400 transition-colors cursor-pointer"
+                            onclick="event.stopPropagation(); playTrack('taiko-drums')">
                             <span>Taiko Drums</span>
                             <span>4:35</span>
                         </div>
@@ -958,20 +821,107 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- About Section -->
+    <section id="about" class="py-24 relative min-h-screen flex items-center overflow-hidden">
+        <!-- Parallax Background for About -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-black/80 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1465919292275-c60ad29da0aa?w=1920&q=80"
+                class="w-full h-full object-cover opacity-40 scale-110" id="about-bg-img">
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="about-content space-y-8">
+                    <div class="inline-block">
+                        <span
+                            class="px-4 py-1 rounded-full border border-yellow-400/30 text-yellow-400 text-xs uppercase tracking-[0.3em] bg-yellow-400/5">
+                            Behind the Legend
+                        </span>
+                    </div>
+
+                    <h2 class="font-mythology text-5xl md:text-7xl font-bold leading-tight">
+                        <span class="text-white">Our </span>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-purple-500">Mythos</span>
+                    </h2>
+
+                    <p class="text-gray-300 text-lg md:text-xl leading-relaxed">
+                        Mythos is a digital sanctuary dedicated to the timeless legends that have shaped human
+                        civilization.
+                        We believe that ancient stories aren't just relics of the past—they are living narratives that
+                        resonate with the human struggle, triumph, and search for meaning.
+                    </p>
+
+                    <div
+                        class="glass-card p-8 rounded-3xl border border-white/5 hover:border-yellow-400/20 transition-all group">
+                        <h3
+                            class="font-mythology text-2xl text-purple-400 mb-4 group-hover:text-yellow-400 transition-colors">
+                            The Anime Aesthetic</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            By blending traditional mythology with modern anime visuals and dynamic soundtracks, we
+                            aim to make these epic chronicles accessible and engaging for a new generation of seekers.
+                            Every brushstroke and every note is crafted to honor the source while pushing the
+                            boundaries of digital storytelling.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <!-- Decorative Element -->
+                    <div
+                        class="absolute -top-10 -left-10 w-40 h-40 bg-yellow-400/10 rounded-full blur-3xl animate-pulse">
+                    </div>
+                    <div
+                        class="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-600/10 rounded-full blur-3xl animate-pulse">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 relative z-10">
+                        <div
+                            class="about-stat glass-card p-8 rounded-2xl text-center hover:translate-y-[-10px] transition-transform">
+                            <div class="text-4xl mb-2">🏛️</div>
+                            <div class="text-3xl font-bold text-white mb-1">100+</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest">Legends</div>
+                        </div>
+                        <div
+                            class="about-stat glass-card p-8 rounded-2xl text-center translate-y-8 hover:translate-y-[-2px] transition-transform">
+                            <div class="text-4xl mb-2">🎨</div>
+                            <div class="text-3xl font-bold text-white mb-1">500+</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest">Visuals</div>
+                        </div>
+                        <div
+                            class="about-stat glass-card p-8 rounded-2xl text-center hover:translate-y-[-10px] transition-transform">
+                            <div class="text-4xl mb-2">🎵</div>
+                            <div class="text-3xl font-bold text-white mb-1">50+</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest">Tracks</div>
+                        </div>
+                        <div
+                            class="about-stat glass-card p-8 rounded-2xl text-center translate-y-8 hover:translate-y-[-2px] transition-transform">
+                            <div class="text-4xl mb-2">✨</div>
+                            <div class="text-3xl font-bold text-white mb-1">∞</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest">Magic</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="bg-black border-t border-white/10 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-purple-600 flex items-center justify-center">
+                        <div
+                            class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-purple-600 flex items-center justify-center">
                             <span class="text-lg">⚡</span>
                         </div>
                         <span class="font-mythology text-xl font-bold text-white">MYTHOS</span>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed max-w-md">
-                        Ancient legends reimagined through modern anime aesthetics. 
-                        Explore the myths that shaped civilizations, now told with stunning visuals and immersive soundscapes.
+                        Ancient legends reimagined through modern anime aesthetics.
+                        Explore the myths that shaped civilizations, now told with stunning visuals and immersive
+                        soundscapes.
                     </p>
                 </div>
                 <div>
@@ -1001,10 +951,12 @@
     </footer>
 
     <!-- Music Player Bar -->
-    <div id="music-player" class="fixed bottom-0 left-0 right-0 music-player transform translate-y-full transition-transform duration-500 z-50 p-4">
+    <div id="music-player"
+        class="fixed bottom-0 left-0 right-0 music-player transform translate-y-full transition-transform duration-500 z-50 p-4">
         <div class="max-w-4xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-purple-600 flex items-center justify-center vinyl-spin" id="vinyl">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-purple-600 flex items-center justify-center vinyl-spin"
+                    id="vinyl">
                     <span class="text-xl">💿</span>
                 </div>
                 <div>
@@ -1012,7 +964,7 @@
                     <p class="text-xs text-gray-400" id="now-playing-artist">Mythos Soundscape</p>
                 </div>
             </div>
-            
+
             <div class="flex items-center gap-6">
                 <div class="hidden md:flex items-end gap-1 h-10 paused" id="visualizer">
                     <div class="visualizer-bar" style="animation-delay: 0s"></div>
@@ -1021,16 +973,20 @@
                     <div class="visualizer-bar" style="animation-delay: 0.3s"></div>
                     <div class="visualizer-bar" style="animation-delay: 0.4s"></div>
                 </div>
-                
-                <button onclick="togglePlay()" class="w-12 h-12 rounded-full bg-yellow-400 text-black flex items-center justify-center hover:scale-110 transition-transform" id="play-btn">
+
+                <button onclick="togglePlay()"
+                    class="w-12 h-12 rounded-full bg-yellow-400 text-black flex items-center justify-center hover:scale-110 transition-transform"
+                    id="play-btn">
                     <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.3 5.84a.5.5 0 01.77-.42l8.56 5.16a.5.5 0 010 .84l-8.56 5.16a.5.5 0 01-.77-.42V5.84z"/>
+                        <path
+                            d="M6.3 5.84a.5.5 0 01.77-.42l8.56 5.16a.5.5 0 010 .84l-8.56 5.16a.5.5 0 01-.77-.42V5.84z" />
                     </svg>
                 </button>
-                
+
                 <button onclick="toggleMusicPlayer()" class="text-gray-400 hover:text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -1039,33 +995,37 @@
 
     <!-- Story Modal -->
     <div id="story-modal" class="modal items-center justify-center p-4" onclick="closeStoryModal(event)">
-        <div class="glass-card rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative" onclick="event.stopPropagation()">
-            <button onclick="closeStoryModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10">
+        <div class="glass-card rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative"
+            onclick="event.stopPropagation()">
+            <button onclick="closeStoryModal()"
+                class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            
+
             <div class="h-64 md:h-96 overflow-hidden relative">
                 <img id="modal-image" src="" class="w-full h-full object-cover" alt="">
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6">
-                    <span id="modal-category" class="px-3 py-1 rounded-full text-xs font-semibold mb-2 inline-block"></span>
+                    <span id="modal-category"
+                        class="px-3 py-1 rounded-full text-xs font-semibold mb-2 inline-block"></span>
                     <h2 id="modal-title" class="font-mythology text-3xl md:text-4xl font-bold text-white"></h2>
                 </div>
             </div>
-            
+
             <div class="p-8">
                 <div class="flex items-center gap-4 mb-6 text-sm text-gray-400">
                     <span id="modal-read-time"></span>
                     <span>•</span>
-                    <span id="modal-music-suggestion" class="text-yellow-400 cursor-pointer hover:underline" onclick="playSuggestedMusic()"></span>
+                    <span id="modal-music-suggestion" class="text-yellow-400 cursor-pointer hover:underline"
+                        onclick="playSuggestedMusic()"></span>
                 </div>
-                
+
                 <div id="modal-content" class="prose prose-invert max-w-none text-gray-300 leading-relaxed space-y-4">
                     <!-- Content injected via JS -->
                 </div>
-                
+
                 <div class="mt-8 pt-8 border-t border-white/10 flex justify-between items-center">
                     <div class="flex gap-4">
                         <button class="flex items-center gap-2 text-gray-400 hover:text-red-400 transition-colors">
@@ -1075,7 +1035,8 @@
                             <span>↗</span> Share
                         </button>
                     </div>
-                    <button onclick="closeStoryModal()" class="px-6 py-2 rounded-full glass-card hover:border-yellow-400/50 transition-colors">
+                    <button onclick="closeStoryModal()"
+                        class="px-6 py-2 rounded-full glass-card hover:border-yellow-400/50 transition-colors">
                         Close
                     </button>
                 </div>
@@ -1086,12 +1047,13 @@
     <!-- Instagram Modal -->
     <div id="insta-modal" class="modal items-center justify-center p-4" onclick="closeInstaModal(event)">
         <div class="relative max-w-2xl w-full" onclick="event.stopPropagation()">
-            <button onclick="closeInstaModal()" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+            <button onclick="closeInstaModal()"
+                class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            
+
             <div class="bg-black rounded-lg overflow-hidden border border-white/10">
                 <div class="aspect-square relative">
                     <img id="insta-modal-image" src="" class="w-full h-full object-cover" alt="">
@@ -1114,470 +1076,15 @@
                         <span class="cursor-pointer hover:scale-110 transition-transform">↗</span>
                         <span class="cursor-pointer hover:scale-110 transition-transform ml-auto">🔖</span>
                     </div>
-                    <p class="text-xs text-gray-500 uppercase tracking-wider">Suggested Track: <span id="insta-modal-music" class="text-yellow-400 cursor-pointer hover:underline" onclick="playInstaMusic()"></span></p>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider">Suggested Track: <span
+                            id="insta-modal-music" class="text-yellow-400 cursor-pointer hover:underline"
+                            onclick="playInstaMusic()"></span></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Initialize GSAP
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Create floating particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 20}s`;
-                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
-                container.appendChild(particle);
-            }
-        }
-        createParticles();
-
-        // Hero Animations
-        gsap.to('#subtitle', {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.5,
-            ease: 'power3.out'
-        });
-
-        gsap.to('#hero-text', {
-            opacity: 1,
-            duration: 1,
-            delay: 0.8,
-            ease: 'power3.out'
-        });
-
-        gsap.to('#hero-cta', {
-            opacity: 1,
-            duration: 1,
-            delay: 1.1,
-            ease: 'power3.out'
-        });
-
-        // Scroll Animations
-        gsap.utils.toArray('.story-card').forEach((card, i) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 0.6,
-                delay: i * 0.1,
-                ease: 'power3.out'
-            });
-        });
-
-        gsap.utils.toArray('.mythology-card').forEach((card, i) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                scale: 0.9,
-                opacity: 0,
-                duration: 0.6,
-                delay: i * 0.1,
-                ease: 'back.out(1.7)'
-            });
-        });
-
-        // Filter Stories
-        function filterStories(category) {
-            const cards = document.querySelectorAll('.story-card');
-            const buttons = document.querySelectorAll('[id^="filter-"]');
-            
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-yellow-400', 'text-black');
-                btn.classList.add('glass-card');
-            });
-            
-            event.target.classList.remove('glass-card');
-            event.target.classList.add('bg-yellow-400', 'text-black');
-            
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    gsap.to(card, { opacity: 1, scale: 1, duration: 0.4, display: 'block' });
-                } else {
-                    gsap.to(card, { opacity: 0, scale: 0.8, duration: 0.4, display: 'none' });
-                }
-            });
-        }
-
-        // Filter Instagram
-        function filterInsta(type) {
-            const items = document.querySelectorAll('.insta-item');
-            const buttons = document.querySelectorAll('.insta-filter');
-            
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-yellow-400', 'text-black');
-                btn.classList.add('bg-white/5');
-            });
-            
-            event.target.classList.remove('bg-white/5');
-            event.target.classList.add('bg-yellow-400', 'text-black');
-            
-            items.forEach((item, index) => {
-                if (type === 'all' || item.dataset.type === type) {
-                    gsap.to(item, { opacity: 1, scale: 1, duration: 0.4, display: 'block', delay: index * 0.05 });
-                } else {
-                    gsap.to(item, { opacity: 0, scale: 0.8, duration: 0.4, display: 'none' });
-                }
-            });
-        }
-
-        // Story Data
-        const stories = {
-            'gita': {
-                title: 'The Bhagavad Gita: Warrior\'s Dilemma',
-                category: 'Indian Epics',
-                categoryColor: 'bg-orange-500 text-orange-100',
-                image: 'https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=1200&q=80',
-                readTime: '5 min read',
-                music: 'Raag Bhairavi',
-                content: `
-                    <p class="text-lg font-anime text-orange-300 mb-4">धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः</p>
-                    <p>On the sacred plains of Kurukshetra, two massive armies stand facing each other. On one side, the Pandavas—five brothers fighting for their rightful kingdom. On the other, the Kauravas—one hundred cousins led by the envious Duryodhana.</p>
-                    <p>Prince Arjuna, the greatest archer of his age, asks his charioteer Krishna to drive between the armies so he may see those he must fight. What he sees destroys his resolve: his beloved grandfather Bhishma, his teacher Drona, his cousins, childhood friends, and mentors.</p>
-                    <p>His bow Gandiva slips from his hands. "How can I fight those I love?" he asks Krishna. "I would rather beg than rule a kingdom stained with their blood."</p>
-                    <p>What follows is the immortal discourse known as the Bhagavad Gita—the Song of the Lord. Krishna reveals profound truths about duty (dharma), the eternal soul (atman), and the path of righteous action without attachment to results.</p>
-                    <p class="font-mythology text-xl text-yellow-400 mt-6 mb-2">"You have the right to work only, but never to its fruits."</p>
-                    <p>This teaching—that we must act according to our duty without craving rewards—has guided warriors, leaders, and seekers for over 5,000 years. Arjuna picks up his bow, not with bloodlust, but with clarity of purpose.</p>
-                    <p>The battle begins, but the real victory is the transformation of a warrior's heart.</p>
-                `
-            },
-            'persephone': {
-                title: 'Persephone & The Pomegranate',
-                category: 'Greek Mythology',
-                categoryColor: 'bg-cyan-500 text-cyan-100',
-                image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&q=80',
-                readTime: '4 min read',
-                music: 'Lyre of Olympus',
-                content: `
-                    <p class="text-lg font-anime text-cyan-300 mb-4">Ἐννέα ἡμέραι καὶ ἐννέα νύκτες</p>
-                    <p>Persephone, daughter of Demeter and Zeus, was gathering flowers in the Nysian plain when the earth suddenly split open. From the chasm emerged Hades, king of the underworld, in his golden chariot drawn by black horses.</p>
-                    <p>Before she could scream, before the nymphs could react, Hades seized the maiden and descended into his realm. Demeter, goddess of harvest, heard her daughter's fading cry and began a desperate search that would alter the fate of the world.</p>
-                    <p>For nine days and nine nights, Demeter wandered the earth with torches, neither eating nor drinking. When she learned from Helios that Hades had taken Persephone with Zeus's permission, her grief turned to rage.</p>
-                    <p>She left Olympus and disguised herself as an old woman. In her grief, she neglected the earth—crops failed, famine spread, and humanity faced extinction.</p>
-                    <p>Zeus relented. Hermes was sent to retrieve Persephone. But Hades had one last trick. Before she left, he offered her pomegranate seeds—sweet, red, and irresistible. Persephone ate six seeds.</p>
-                    <p>Because she had eaten in the underworld, she was bound to return. A compromise was reached: six months above with her mother (spring and summer), six months below with Hades (autumn and winter).</p>
-                    <p>This is why the earth blooms when Persephone returns to Demeter, and why it sleeps when she descends to her dark husband.</p>
-                `
-            },
-            'ragnarok': {
-                title: 'Twilight of the Gods: Ragnarök',
-                category: 'Norse Mythology',
-                categoryColor: 'bg-blue-500 text-blue-100',
-                image: 'https://images.unsplash.com/photo-1514539079130-25950c84af65?w=1200&q=80',
-                readTime: '7 min read',
-                music: 'Wardruna Style',
-                content: `
-                    <p class="text-lg font-anime text-blue-300 mb-4">Brothers shall fight and fell each other</p>
-                    <p>The wolf Skoll chases the sun across the sky, seeking to devour it. His brother Hati pursues the moon. They will catch them at last.</p>
-                    <p>The Fimbulwinter comes—three successive winters with no summer between. Snow falls in all directions. The bonds of kinship break. Humanity turns against itself.</p>
-                    <p>The rooster Fjalar crows in Jotunheim, alerting the giants. The red cock Gullinkambi crows in Valhalla, waking the einherjar—the honored dead who feast and fight by day, preparing for the final battle.</p>
-                    <p>Heimdall sees the enemy approaching. He blows the Gjallarhorn, and its sound echoes through all nine worlds. The gods arm themselves. Odin rides Sleipnir to Mimir's well, seeking wisdom one last time.</p>
-                    <p>The ship Naglfar—made from the untrimmed nails of the dead—sails from the north, carrying legions of giants. Loki steers, free from his bonds. Fire giants march from Muspelheim, led by Surtr with his flaming sword.</p>
-                    <p>Odin fights Fenrir the wolf and is devoured. Thor kills the World Serpent Jormungandr but takes nine steps before falling dead from its venom. Freyr falls to Surtr. Garm and Tyr slay each other. Heimdall and Loki kill one another.</p>
-                    <p>Surtr casts fire across the world. The earth sinks into the sea. Yet from the ashes, the world is reborn—green and fertile, to be inherited by the surviving gods and the children of the fallen.</p>
-                `
-            },
-            'amaterasu': {
-                title: 'Amaterasu & The Heavenly Cave',
-                category: 'Japanese Mythology',
-                categoryColor: 'bg-red-500 text-red-100',
-                image: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80',
-                readTime: '6 min read',
-                music: 'Koto & Shakuhachi',
-                content: `
-                    <p class="text-lg font-anime text-red-300 mb-4">天照大神</p>
-                    <p>Amaterasu Omikami, the Sun Goddess, was the most radiant of the kami. Her light illuminated the High Plain of Heaven and brought life to the world below. But her brother Susano-o, god of storms, was wild and destructive.</p>
-                    <p>One day, Susano-o rampaged through Amaterasu's rice fields, breaking down the divisions and defiling her weaving hall. He even threw a flayed horse through the roof of her sacred weaving room, killing one of her attendants.</p>
-                    <p>Heartbroken and enraged, Amaterasu retreated into the Ama-no-Iwato—the Heavenly Rock Cave—and sealed the entrance with a massive boulder. The world plunged into darkness.</p>
-                    <p>Without the sun, rice stopped growing. The kami of darkness ruled the earth. Eight million gods gathered at the cave's entrance, desperate to lure the Sun Goddess out.</p>
-                    <p>The wise goddess Ame-no-Uzume had an idea. She overturned a tub and began a wild, ecstatic dance upon it, stamping her feet and exposing herself. The other gods laughed uproariously—the sound of divine mirth echoing through the cosmos.</p>
-                    <p>Curious, Amaterasu peeked out to see what could cause such joy in her absence. She saw her own reflection in a bronze mirror that had been hung on a tree outside. Captivated by her own radiance, she stepped further out.</p>
-                    <p>Tajikarao, the strong god of doorways, seized her and pulled her fully into the world. Light returned. The gods sealed the cave so she could never retreat again. And thus, the sun continues to rise—though sometimes, clouds gather, as if the cave still calls to her.</p>
-                `
-            },
-            'osiris': {
-                title: 'Osiris: Lord of the Resurrection',
-                category: 'Egyptian Mythology',
-                categoryColor: 'bg-yellow-500 text-yellow-100',
-                image: 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=1200&q=80',
-                readTime: '5 min read',
-                music: 'Ney Flute',
-                content: `
-                    <p class="text-lg font-anime text-yellow-300 mb-4">𓁹 𓊪 𓏏 𓇯</p>
-                    <p>Osiris was the first pharaoh, beloved by gods and humans alike. He brought civilization to Egypt—agriculture, laws, and worship. His brother Set, god of chaos and desert storms, grew jealous of his popularity and power.</p>
-                    <p>Set devised a cunning trap. He created a beautiful sarcophagus exactly fitted to Osiris's measurements and promised it as a gift to whoever fit inside perfectly. When Osiris lay down, Set and his conspirators sealed the coffin and threw it into the Nile.</p>
-                    <p>Isis, Osiris's wife and sister, would not accept his death. She searched Egypt and beyond, finally finding the coffin trapped in a tamarisk tree in Byblos. She brought it back to Egypt in secret.</p>
-                    <p>But Set discovered the body. In his rage, he tore Osiris into fourteen pieces and scattered them across Egypt. Isis, with her sister Nephthys, searched again. They found all pieces except one—the phallus, eaten by fish in the Nile.</p>
-                    <p>Isis reassembled Osiris, binding him together with linen bandages—the first mummy. Through her magic and her love, she briefly resurrected him. Though he could not remain in the world of the living, he became lord of the Duat, the underworld.</p>
-                    <p>From their union in death, Isis bore Horus, who would avenge his father and defeat Set. Thus, Osiris became the promise of resurrection—the guarantee that death is not the end, but a doorway to eternal life for those who lived righteously.</p>
-                `
-            },
-            'cuchulainn': {
-                title: 'Cú Chulainn: The Hound of Ulster',
-                category: 'Celtic Mythology',
-                categoryColor: 'bg-emerald-500 text-emerald-100',
-                image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&q=80',
-                readTime: '8 min read',
-                music: 'Celtic Folk',
-                content: `
-                    <p class="text-lg font-anime text-emerald-300 mb-4">Cú Chulainn mac Sualtaim</p>
-                    <p>Setanta was seven years old when he first tasted glory. While traveling to the court of King Conchobar at Emain Macha, he saw a hound—massive, fierce, the guardian beast of the smith Culann. The hound attacked, and the boy, armed only with his hurley ball and stick, slew it.</p>
-                    <p>Culann was devastated—the hound had protected his forge. Young Setanta offered to guard the smith's home himself until a replacement could be reared. Thus he earned his name: Cú Chulainn—the Hound of Culann.</p>
-                    <p>At seventeen, Cú Chulainn sought to take up arms. The druid Cathbad prophesied that whoever took arms that day would become famous, but his life would be short. Cú Chulainn chose fame.</p>
-                    <p>His most terrible gift was the ríastrad—the warp spasm. When battle fury took him, his body would twist and contort: one eye would swell to the size of his head, the other shrink to a pinprick. His mouth split to his ears, his hair stood on end like spikes, and a column of blood rose from his crown.</p>
-                    <p>In this form, he could not distinguish friend from foe. Once, the Ulstermen had to send out naked women to shock him back to sanity.</p>
-                    <p>His greatest tragedy came with the Cattle Raid of Cooley. Maeve of Connacht invaded Ulster to steal the Brown Bull. While the men of Ulster were cursed with labor pains, Cú Chulainn alone defended the border, fighting single combats against Maeve's champions for months.</p>
-                    <p>He died at thirty-three, bound to a standing stone by his own spear, facing his enemies to the last. To his death, the hero's light burned around him, so fierce that none dared approach until a raven landed on his shoulder—the sign that his soul had departed.</p>
-                `
-            }
-        };
-
-        // Open Story Modal
-        function openStory(storyId) {
-            const story = stories[storyId];
-            if (!story) return;
-            
-            document.getElementById('modal-image').src = story.image;
-            document.getElementById('modal-category').textContent = story.category;
-            document.getElementById('modal-category').className = `px-3 py-1 rounded-full text-xs font-semibold mb-2 inline-block ${story.categoryColor}`;
-            document.getElementById('modal-title').textContent = story.title;
-            document.getElementById('modal-read-time').textContent = story.readTime;
-            document.getElementById('modal-music-suggestion').textContent = `🎵 ${story.music}`;
-            document.getElementById('modal-content').innerHTML = story.content;
-            
-            const modal = document.getElementById('story-modal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Auto-play suggestion
-            setTimeout(() => {
-                playStoryMusic(storyId.split('-')[0]);
-            }, 1000);
-        }
-
-        function closeStoryModal(event) {
-            if (!event || event.target.id === 'story-modal' || event.target.closest('button')) {
-                document.getElementById('story-modal').classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        // Instagram Data
-        const instaPosts = {
-            1: { image: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=800&q=80', caption: '"I am Time, the destroyer of all..." - Krishna reveals his universal form to Arjuna on the battlefield. The Bhagavad Gita teaches us to act without attachment to results. 🕉️ #Mahabharata #BhagavadGita #Hinduism #Spirituality', music: 'Raag Bhairavi' },
-            2: { image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80', caption: 'Zeus, wielder of thunderbolts, king of Olympus. His symbols—the eagle, the oak tree, and the thunderbolt. Father of gods and men, yet often ruled by his passions. ⚡ #GreekMythology #Zeus #Olympus #AncientGreece', music: 'Lyre of Olympus' },
-            3: { image: 'https://images.unsplash.com/photo-1514539079130-25950c84af65?w=800&q=80', caption: 'Valhalla awaits. The hall of the slain, where Odin welcomes warriors who die in battle. By day they fight, by night they feast, preparing for Ragnarök. 🛡️ #NorseMythology #Valhalla #Vikings #Asatru', music: 'Wardruna Style' },
-            4: { image: 'https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=800&q=80', caption: '"Better is one\'s own duty, though imperfect, than the duty of another well performed." - Bhagavad Gita 3.35. Your dharma is unique to you. Follow your path. 🙏 #Dharma #BhagavadGita #Wisdom #SpiritualQuotes', music: 'Om Namah Shivaya' },
-            5: { image: 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80', caption: 'Anubis, guardian of the scales. In the Hall of Two Truths, he weighs the heart against the feather of Ma\'at. If the heart is lighter, the soul passes to the Field of Reeds. ⚖️ #EgyptianMythology #Anubis #Afterlife #AncientEgypt', music: 'Ney Flute' },
-            6: { image: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80', caption: 'The Floating Torii of Itsukushima Shrine. When the tide rises, it appears to float on water—a gateway between the spirit world and our own. ⛩️ #JapaneseMythology #Shinto #Torii #Miyajima', music: 'Koto & Shakuhachi' },
-            7: { image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80', caption: '"Know thyself" - Inscribed at the Temple of Apollo at Delphi. The foundation of all wisdom begins with self-knowledge. Look within. 🏛️ #Delphi #GreekPhilosophy #KnowThyself #Wisdom', music: 'Oracle Whispers' },
-            8: { image: 'https://images.unsplash.com/photo-1514539079130-25950c84af65?w=800&q=80', caption: 'Mjölnir in hand, Thor protects Midgard from the giants. His hammer returns to his hand after being thrown, and his belt Megingjör doubles his strength. 🔨 #Thor #NorseMythology #Mjolnir #Asgard', music: 'Valhalla Calling' },
-            9: { image: 'https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=800&q=80', caption: 'Kurukshetra—the field of dharma. Here Krishna delivered the Bhagavad Gita to Arjuna. The battlefield represents the human heart, where duty and emotion wage eternal war. ⚔️ #Kurukshetra #Mahabharata #DharmaYuddha', music: 'Krishna\'s Flute' }
-        };
-
-        function openInstaModal(id) {
-            const post = instaPosts[id];
-            document.getElementById('insta-modal-image').src = post.image;
-            document.getElementById('insta-modal-caption').textContent = post.caption;
-            document.getElementById('insta-modal-music').textContent = post.music;
-            
-            const modal = document.getElementById('insta-modal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeInstaModal(event) {
-            if (!event || event.target.id === 'insta-modal' || event.target.closest('button')) {
-                document.getElementById('insta-modal').classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        // Music Player
-        let isPlaying = false;
-        let currentTrack = null;
-
-        function toggleMusicPlayer() {
-            const player = document.getElementById('music-player');
-            player.classList.toggle('translate-y-full');
-        }
-
-        function togglePlay() {
-            isPlaying = !isPlaying;
-            const vinyl = document.getElementById('vinyl');
-            const visualizer = document.getElementById('visualizer');
-            const btn = document.getElementById('play-btn');
-            
-            if (isPlaying) {
-                vinyl.classList.add('playing');
-                visualizer.classList.remove('paused');
-                visualizer.classList.add('playing');
-                btn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/>';
-            } else {
-                vinyl.classList.remove('playing');
-                visualizer.classList.remove('playing');
-                visualizer.classList.add('paused');
-                btn.innerHTML = '<svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 5.84a.5.5 0 01.77-.42l8.56 5.16a.5.5 0 010 .84l-8.56 5.16a.5.5 0 01-.77-.42V5.84z"/></svg>';
-            }
-        }
-
-        function playTrack(trackName) {
-            const trackNames = {
-                'raag-bhairavi': 'Raag Bhairavi',
-                'om-namah': 'Om Namah Shivaya',
-                'krishna-flute': 'Krishna\'s Flute',
-                'apollo-lyre': 'Apollo\'s Lyre',
-                'dionysus-rhythm': 'Dionysus Rhythm',
-                'oracle-whispers': 'Oracle Whispers',
-                'valhalla-calling': 'Valhalla Calling',
-                'wardruna-style': 'Wardruna Style',
-                'winter-is-coming': 'Winter is Coming',
-                'sakura-koto': 'Sakura Koto',
-                'shakuhachi-meditation': 'Shakuhachi Meditation',
-                'taiko-drums': 'Taiko Drums'
-            };
-            
-            document.getElementById('now-playing').textContent = trackNames[trackName] || trackName;
-            document.getElementById('music-player').classList.remove('translate-y-full');
-            
-            if (!isPlaying) togglePlay();
-        }
-
-        function playStoryMusic(category) {
-            const musicMap = {
-                'indian': 'Raag Bhairavi',
-                'greek': 'Lyre of Olympus',
-                'norse': 'Wardruna Style',
-                'egyptian': 'Ney Flute',
-                'japanese': 'Koto & Shakuhachi',
-                'celtic': 'Celtic Folk'
-            };
-            
-            document.getElementById('now-playing').textContent = musicMap[category] || 'Mythos Soundscape';
-            document.getElementById('music-player').classList.remove('translate-y-full');
-            
-            if (!isPlaying) togglePlay();
-        }
-
-        function playSuggestedMusic() {
-            const music = document.getElementById('modal-music-suggestion').textContent.replace('🎵 ', '');
-            document.getElementById('now-playing').textContent = music;
-            document.getElementById('music-player').classList.remove('translate-y-full');
-            if (!isPlaying) togglePlay();
-        }
-
-        function playInstaMusic() {
-            const music = document.getElementById('insta-modal-music').textContent;
-            document.getElementById('now-playing').textContent = music;
-            document.getElementById('music-player').classList.remove('translate-y-full');
-            if (!isPlaying) togglePlay();
-        }
-
-        function selectPlaylist(category) {
-            playStoryMusic(category);
-        }
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-black/80');
-            } else {
-                navbar.classList.remove('bg-black/80');
-            }
-        });
-
-        // Text scramble effect for title
-        class TextScramble {
-            constructor(el) {
-                this.el = el;
-                this.chars = '!<>-_\\/[]{}—=+*^?#________';
-                this.update = this.update.bind(this);
-            }
-            setText(newText) {
-                const oldText = this.el.innerText;
-                const length = Math.max(oldText.length, newText.length);
-                const promise = new Promise((resolve) => this.resolve = resolve);
-                this.queue = [];
-                for (let i = 0; i < length; i++) {
-                    const from = oldText[i] || '';
-                    const to = newText[i] || '';
-                    const start = Math.floor(Math.random() * 40);
-                    const end = start + Math.floor(Math.random() * 40);
-                    this.queue.push({ from, to, start, end });
-                }
-                cancelAnimationFrame(this.frameRequest);
-                this.frame = 0;
-                this.update();
-                return promise;
-            }
-            update() {
-                let output = '';
-                let complete = 0;
-                for (let i = 0, n = this.queue.length; i < n; i++) {
-                    let { from, to, start, end, char } = this.queue[i];
-                    if (this.frame >= end) {
-                        complete++;
-                        output += to;
-                    } else if (this.frame >= start) {
-                        if (!char || Math.random() < 0.28) {
-                            char = this.randomChar();
-                            this.queue[i].char = char;
-                        }
-                        output += `<span class="text-yellow-600">${char}</span>`;
-                    } else {
-                        output += from;
-                    }
-                }
-                this.el.innerHTML = output;
-                if (complete === this.queue.length) {
-                    this.resolve();
-                } else {
-                    this.frameRequest = requestAnimationFrame(this.update);
-                    this.frame++;
-                }
-            }
-            randomChar() {
-                return this.chars[Math.floor(Math.random() * this.chars.length)];
-            }
-        }
-
-        // Initialize scramble on hover
-        const scrambleEl = document.querySelector('.scramble-text');
-        const fx = new TextScramble(scrambleEl);
-        let counter = 0;
-        const phrases = [
-            'MYTHOS',
-            '神話',
-            'MYTHOS'
-        ];
-
-        scrambleEl.addEventListener('mouseenter', () => {
-            fx.setText(phrases[counter]).then(() => {
-                counter = (counter + 1) % phrases.length;
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,738 @@
+<!-- GREEK_MYTHOLOGY.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greek Mythology | Mythos - Olympus, Titans & Heroes</title>
+    <meta name="description" content="Discover the gods of Olympus, the trials of heroes, and the tragedies of ancient Greece. Zeus, Athena, Hercules, and more.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            --greek-blue: #00C9FF;
+            --greek-white: #FFFFFF;
+            --greek-gold: #FFD700;
+            --greek-marble: #F5F5F5;
+            --deep-blue: #0f172a;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000510;
+            color: #e8f4f8;
+            overflow-x: hidden;
+        }
+        
+        .font-mythology {
+            font-family: 'Cinzel', serif;
+        }
+        
+        .font-greek {
+            font-family: 'Cinzel', serif;
+            font-style: italic;
+        }
+        
+        /* Greek Pattern Background */
+        .greek-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                repeating-linear-gradient(90deg, #00C9FF 0px, transparent 1px, transparent 50px, #00C9FF 51px),
+                repeating-linear-gradient(0deg, #00C9FF 0px, transparent 1px, transparent 50px, #00C9FF 51px);
+        }
+        
+        /* Lightning Effect */
+        .lightning {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #FFD700, transparent);
+            opacity: 0;
+            animation: strike 5s infinite;
+        }
+        
+        @keyframes strike {
+            0%, 90%, 100% { opacity: 0; }
+            95% { opacity: 1; }
+        }
+        
+        /* Glass Cards with Greek Theme */
+        .glass-card-greek {
+            background: linear-gradient(135deg, rgba(0, 201, 255, 0.1), rgba(0, 100, 200, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 201, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 201, 255, 0.2);
+        }
+        
+        .glass-card-greek:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+        }
+        
+        /* Column Style */
+        .greek-column {
+            position: relative;
+            width: 60px;
+            height: 200px;
+            background: linear-gradient(to right, #2a2a2a, #4a4a4a, #2a2a2a);
+            border-radius: 5px;
+        }
+        
+        .greek-column::before,
+        .greek-column::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            right: -10px;
+            height: 20px;
+            background: linear-gradient(to right, #3a3a3a, #5a5a5a, #3a3a3a);
+            border-radius: 3px;
+        }
+        
+        .greek-column::before { top: 0; }
+        .greek-column::after { bottom: 0; }
+        
+        /* God Card Hover */
+        .god-card {
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .god-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .god-card:hover::before {
+            opacity: 1;
+        }
+        
+        .god-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00C9FF, #FFD700);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #000510;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00C9FF, #FFD700);
+            border-radius: 5px;
+        }
+        
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Temple Architecture */
+        .temple-pediment {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(135deg, #3a3a3a, #5a5a5a);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            position: relative;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Greek Pattern Background -->
+    <div class="greek-pattern"></div>
+
+    <!-- Lightning Effects -->
+    <div class="lightning" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+    <div class="lightning" style="top: 30%; right: 15%; animation-delay: 2s;"></div>
+    <div class="lightning" style="top: 60%; left: 70%; animation-delay: 4s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card-greek border-b border-cyan-500/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-sm uppercase tracking-widest hover:text-cyan-400 transition-colors">Home</a>
+                    <a href="INDIAN_EPICS.html" class="nav-link text-sm uppercase tracking-widest hover:text-cyan-400 transition-colors">Indian</a>
+                    <a href="GREEK_MYTHOLOGY.html" class="nav-link text-sm uppercase tracking-widest text-cyan-400">Greek</a>
+                    <a href="NORSE_LEGENDS.html" class="nav-link text-sm uppercase tracking-widest hover:text-cyan-400 transition-colors">Norse</a>
+                    <a href="JAPANESE_MYTHS.html" class="nav-link text-sm uppercase tracking-widest hover:text-cyan-400 transition-colors">Japanese</a>
+                    <a href="EGYPTIAN_MYTHS.html" class="nav-link text-sm uppercase tracking-widest hover:text-cyan-400 transition-colors">Egyptian</a>
+                </div>
+
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-black to-black"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1564399580075-5dfe19c205f3?w=1920&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-6 inline-block reveal">
+                <span class="px-4 py-1 rounded-full border border-cyan-400/50 text-cyan-400 text-xs uppercase tracking-[0.3em] bg-cyan-400/10">
+                    ΕΛΛΗΝΙΚΗ ΜΥΘΟΛΟΓΙΑ
+                </span>
+            </div>
+            
+            <h1 class="font-mythology text-6xl md:text-8xl font-bold mb-6 leading-tight reveal">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-cyan-300">
+                    Greek Mythology
+                </span>
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-cyan-200/60 font-greek mb-8 reveal">
+                "Know thyself"
+            </p>
+            
+            <p class="max-w-3xl mx-auto text-lg text-gray-300 mb-12 leading-relaxed reveal">
+                Ascend to Mount Olympus. Witness the wrath of Zeus, the wisdom of Athena, and the passions 
+                that drove gods and mortals alike. From the depths of Tartarus to the heights of Olympus, 
+                explore the stories that founded Western civilization.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <a href="#olympus" class="px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-500 rounded-full font-semibold text-white hover:scale-105 transition-transform">
+                    The Olympians
+                </a>
+                <a href="#heroes" class="px-8 py-3 glass-card-greek rounded-full font-semibold hover:border-yellow-400/50 transition-all">
+                    Heroes
+                </a>
+                <a href="#titans" class="px-8 py-3 glass-card-greek rounded-full font-semibold hover:border-yellow-400/50 transition-all">
+                    Titans
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Olympians Section -->
+    <section id="olympus" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-mythology text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-yellow-400">
+                    The Twelve Olympians
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    The principal deities of the Greek pantheon, residing atop Mount Olympus
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Zeus -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-3xl">
+                            ⚡
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-yellow-400">Zeus</h3>
+                            <p class="text-cyan-400 text-sm">King of the Gods</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Ruler of Mount Olympus and god of the sky, thunder, lightning, law, order, and justice. 
+                        Wielder of the thunderbolt.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-yellow-500/20 rounded text-xs text-yellow-400">Thunderbolt</span>
+                        <span class="px-2 py-1 bg-yellow-500/20 rounded text-xs text-yellow-400">Eagle</span>
+                        <span class="px-2 py-1 bg-yellow-500/20 rounded text-xs text-yellow-400">Oak</span>
+                    </div>
+                </div>
+
+                <!-- Hera -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-3xl">
+                            🦚
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-pink-400">Hera</h3>
+                            <p class="text-cyan-400 text-sm">Queen of the Gods</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Goddess of marriage, women, childbirth, and family. The protector of women and the 
+                        punisher of Zeus's infidelities.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-pink-500/20 rounded text-xs text-pink-400">Peacock</span>
+                        <span class="px-2 py-1 bg-pink-500/20 rounded text-xs text-pink-400">Pomegranate</span>
+                    </div>
+                </div>
+
+                <!-- Poseidon -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center text-3xl">
+                            🔱
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-blue-400">Poseidon</h3>
+                            <p class="text-cyan-400 text-sm">God of the Sea</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Ruler of the oceans, earthquakes, and horses. His trident can shake the earth and 
+                        shatter any object.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-blue-500/20 rounded text-xs text-blue-400">Trident</span>
+                        <span class="px-2 py-1 bg-blue-500/20 rounded text-xs text-blue-400">Horse</span>
+                        <span class="px-2 py-1 bg-blue-500/20 rounded text-xs text-blue-400">Dolphin</span>
+                    </div>
+                </div>
+
+                <!-- Athena -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 flex items-center justify-center text-3xl">
+                            🦉
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-gray-300">Athena</h3>
+                            <p class="text-cyan-400 text-sm">Goddess of Wisdom</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Born fully armed from Zeus's forehead. Goddess of wisdom, warfare strategy, and crafts. 
+                        The patron of Athens.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-gray-500/20 rounded text-xs text-gray-300">Owl</span>
+                        <span class="px-2 py-1 bg-gray-500/20 rounded text-xs text-gray-300">Olive Tree</span>
+                        <span class="px-2 py-1 bg-gray-500/20 rounded text-xs text-gray-300">Aegis</span>
+                    </div>
+                </div>
+
+                <!-- Apollo -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-300 to-orange-400 flex items-center justify-center text-3xl">
+                            ☀️
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-yellow-300">Apollo</h3>
+                            <p class="text-cyan-400 text-sm">God of Light</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        God of the sun, music, poetry, prophecy, and healing. The most Greek of all gods, 
+                        representing harmony and order.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-yellow-500/20 rounded text-xs text-yellow-300">Lyre</span>
+                        <span class="px-2 py-1 bg-yellow-500/20 rounded text-xs text-yellow-300">Laurel</span>
+                        <span class="px-2 py-1 bg-yellow-500/20 rounded text-xs text-yellow-300">Python</span>
+                    </div>
+                </div>
+
+                <!-- Artemis -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-teal-600 flex items-center justify-center text-3xl">
+                            🏹
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-green-400">Artemis</h3>
+                            <p class="text-cyan-400 text-sm">Goddess of the Hunt</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Virgin goddess of the hunt, wilderness, wild animals, and the moon. Twin sister of 
+                        Apollo, sworn to eternal chastity.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-green-500/20 rounded text-xs text-green-400">Bow</span>
+                        <span class="px-2 py-1 bg-green-500/20 rounded text-xs text-green-400">Deer</span>
+                        <span class="px-2 py-1 bg-green-500/20 rounded text-xs text-green-400">Moon</span>
+                    </div>
+                </div>
+
+                <!-- Ares -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-3xl">
+                            ⚔️
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-red-500">Ares</h3>
+                            <p class="text-cyan-400 text-sm">God of War</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        The brutal and bloodthirsty god of war. Unlike Athena's strategic warfare, Ares 
+                        represents the violent and physical aspects of battle.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-red-500/20 rounded text-xs text-red-400">Spear</span>
+                        <span class="px-2 py-1 bg-red-500/20 rounded text-xs text-red-400">Vulture</span>
+                        <span class="px-2 py-1 bg-red-500/20 rounded text-xs text-red-400">Dog</span>
+                    </div>
+                </div>
+
+                <!-- Aphrodite -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-300 to-rose-500 flex items-center justify-center text-3xl">
+                            🕊️
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-pink-300">Aphrodite</h3>
+                            <p class="text-cyan-400 text-sm">Goddess of Love</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Born from sea foam, goddess of love, beauty, pleasure, and procreation. Her beauty 
+                        caused wars among gods and mortals alike.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-pink-500/20 rounded text-xs text-pink-300">Dove</span>
+                        <span class="px-2 py-1 bg-pink-500/20 rounded text-xs text-pink-300">Rose</span>
+                        <span class="px-2 py-1 bg-pink-500/20 rounded text-xs text-pink-300">Shell</span>
+                    </div>
+                </div>
+
+                <!-- Hephaestus -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-orange-600 to-red-600 flex items-center justify-center text-3xl">
+                            🔨
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-orange-500">Hephaestus</h3>
+                            <p class="text-cyan-400 text-sm">God of Fire</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        The lame blacksmith god, master craftsman who forged the weapons of the gods. 
+                        Husband of Aphrodite, cast from Olympus by Hera.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-orange-500/20 rounded text-xs text-orange-400">Hammer</span>
+                        <span class="px-2 py-1 bg-orange-500/20 rounded text-xs text-orange-400">Anvil</span>
+                        <span class="px-2 py-1 bg-orange-500/20 rounded text-xs text-orange-400">Volcano</span>
+                    </div>
+                </div>
+
+                <!-- Hermes -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-300 to-emerald-500 flex items-center justify-center text-3xl">
+                            👟
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-emerald-400">Hermes</h3>
+                            <p class="text-cyan-400 text-sm">Messenger of the Gods</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        The winged messenger, god of trade, thieves, travelers, sports, and border crossings. 
+                        Guide of souls to the underworld.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-emerald-500/20 rounded text-xs text-emerald-400">Caduceus</span>
+                        <span class="px-2 py-1 bg-emerald-500/20 rounded text-xs text-emerald-400">Winged Sandals</span>
+                    </div>
+                </div>
+
+                <!-- Demeter -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-600 to-green-600 flex items-center justify-center text-3xl">
+                            🌾
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-yellow-500">Demeter</h3>
+                            <p class="text-cyan-400 text-sm">Goddess of Harvest</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Goddess of the harvest, agriculture, and the cycle of life and death. Her grief 
+                        over Persephone creates the seasons.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-yellow-500/20 rounded text-xs text-yellow-400">Wheat</span>
+                        <span class="px-2 py-1 bg-yellow-500/20 rounded text-xs text-yellow-400">Cornucopia</span>
+                    </div>
+                </div>
+
+                <!-- Dionysus -->
+                <div class="god-card glass-card-greek rounded-2xl p-6 reveal">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-3xl">
+                            🍷
+                        </div>
+                        <div>
+                            <h3 class="font-mythology text-2xl font-bold text-purple-400">Dionysus</h3>
+                            <p class="text-cyan-400 text-sm">God of Wine</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        God of wine, fertility, ritual madness, religious ecstasy, and theatre. The twice-born 
+                        god who conquered death.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-purple-500/20 rounded text-xs text-purple-400">Thyrsus</span>
+                        <span class="px-2 py-1 bg-purple-500/20 rounded text-xs text-purple-400">Leopard</span>
+                        <span class="px-2 py-1 bg-purple-500/20 rounded text-xs text-purple-400">Grapevine</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heroes Section -->
+    <section id="heroes" class="py-24 bg-gradient-to-b from-black to-blue-950/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-mythology text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-yellow-400">
+                    Legendary Heroes
+                </h2>
+                <p class="text-gray-400">Mortals who achieved immortality through their deeds</p>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Heracles -->
+                <div class="glass-card-greek rounded-2xl overflow-hidden reveal">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="h-64 lg:h-auto">
+                            <img src="https://images.unsplash.com/photo-1564399580075-5dfe19c205f3?w=800&q=80" 
+                                 alt="Heracles" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-mythology text-3xl font-bold text-yellow-400 mb-2">Heracles (Hercules)</h3>
+                            <p class="text-cyan-400 text-sm mb-4">The Greatest of Heroes</p>
+                            <p class="text-gray-300 mb-4">
+                                Born of Zeus and the mortal Alcmene, Heracles was the strongest man to ever live. 
+                                Driven mad by Hera, he killed his wife and children, and sought redemption through 
+                                twelve impossible labors.
+                            </p>
+                            <p class="text-gray-300 mb-6">
+                                He slew the Nemean Lion, defeated the Hydra, captured the Golden Hind, cleaned the 
+                                Augean stables in a single day, and descended to Hades to capture Cerberus. After 
+                                death, he was granted immortality on Olympus.
+                            </p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="px-3 py-1 bg-yellow-500/20 rounded-full text-xs text-yellow-400">12 Labors</span>
+                                <span class="px-3 py-1 bg-yellow-500/20 rounded-full text-xs text-yellow-400">Nemean Lion</span>
+                                <span class="px-3 py-1 bg-yellow-500/20 rounded-full text-xs text-yellow-400">Club & Bow</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perseus -->
+                <div class="glass-card-greek rounded-2xl overflow-hidden reveal">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-8 order-2 lg:order-1">
+                            <h3 class="font-mythology text-3xl font-bold text-cyan-400 mb-2">Perseus</h3>
+                            <p class="text-cyan-400 text-sm mb-4">Slayer of Medusa</p>
+                            <p class="text-gray-300 mb-4">
+                                Son of Zeus and Danaë, Perseus was cast into the sea in a chest with his mother. 
+                                He grew to manhood on the island of Seriphos, where the king sent him on a suicide 
+                                mission: to bring back the head of Medusa.
+                            </p>
+                            <p class="text-gray-300 mb-6">
+                                Armed with winged sandals, a cap of invisibility, and a mirrored shield from the gods, 
+                                he slew the Gorgon, rescued Andromeda from a sea monster, and founded the city of Mycenae.
+                            </p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-400">Medusa</span>
+                                <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-400">Andromeda</span>
+                                <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-400">Harpe</span>
+                            </div>
+                        </div>
+                        <div class="h-64 lg:h-auto order-1 lg:order-2">
+                            <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=800&q=80" 
+                                 alt="Perseus" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theseus -->
+                <div class="glass-card-greek rounded-2xl overflow-hidden reveal">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="h-64 lg:h-auto">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80" 
+                                 alt="Theseus" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-mythology text-3xl font-bold text-purple-400 mb-2">Theseus</h3>
+                            <p class="text-cyan-400 text-sm mb-4">Founder of Athens</p>
+                            <p class="text-gray-300 mb-4">
+                                The son of Aegeus (or Poseidon) and Aethra, Theseus is best known for entering the 
+                                Labyrinth of Crete and slaying the Minotaur, a half-man, half-bull monster that 
+                                demanded human sacrifice.
+                            </p>
+                            <p class="text-gray-300 mb-6">
+                                With the help of Ariadne's thread, he navigated the maze, killed the beast, and 
+                                emerged victorious. He later became the king of Athens and a legendary reformer.
+                            </p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-400">Minotaur</span>
+                                <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-400">Labyrinth</span>
+                                <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-400">Ariadne's Thread</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Odysseus -->
+                <div class="glass-card-greek rounded-2xl overflow-hidden reveal">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-8 order-2 lg:order-1">
+                            <h3 class="font-mythology text-3xl font-bold text-emerald-400 mb-2">Odysseus</h3>
+                            <p class="text-cyan-400 text-sm mb-4">The Cunning Voyager</p>
+                            <p class="text-gray-300 mb-4">
+                                King of Ithaca, hero of the Trojan War, and protagonist of Homer's Odyssey. Known 
+                                for his intelligence and cunning rather than brute strength, he devised the 
+                                Trojan Horse that ended the war.
+                            </p>
+                            <p class="text-gray-300 mb-6">
+                                His journey home took ten years, facing the Cyclops Polyphemus, the witch Circe, 
+                                the Sirens, Scylla and Charybdis, and the wrath of Poseidon. He is the archetype 
+                                of the wandering hero.
+                            </p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="px-3 py-1 bg-emerald-500/20 rounded-full text-xs text-emerald-400">Trojan Horse</span>
+                                <span class="px-3 py-1 bg-emerald-500/20 rounded-full text-xs text-emerald-400">Cyclops</span>
+                                <span class="px-3 py-1 bg-emerald-500/20 rounded-full text-xs text-emerald-400">20 Years Away</span>
+                            </div>
+                        </div>
+                        <div class="h-64 lg:h-auto order-1 lg:order-2">
+                            <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80" 
+                                 alt="Odysseus" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-cyan-500/20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </div>
+                
+                <div class="flex gap-6 text-sm text-gray-400">
+                    <a href="index.html" class="hover:text-cyan-400 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-cyan-400 transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-xs text-gray-600">
+                <p>© 2024 Mythos. Exploring the wisdom of ancient Greece.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90');
+            } else {
+                navbar.classList.remove('bg-black/90');
+            }
+        });
+    </script>
+</body>
+</html>

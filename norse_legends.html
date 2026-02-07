@@ -1,0 +1,432 @@
+
+<!-- NORSE_LEGENDS.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norse Legends | Mythos - Asgard, Vikings & Ragnarök</title>
+    <meta name="description" content="Explore Norse mythology. Discover Odin, Thor, Loki, and the epic tales of the Vikings from Asgard to Ragnarök.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --norse-blue: #1e3c72;
+            --norse-ice: #a8dadc;
+            --norse-gold: #FFD700;
+            --norse-rune: #c9a227;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0e1a;
+            color: #e8f1f2;
+            overflow-x: hidden;
+        }
+        
+        .font-mythology {
+            font-family: 'Cinzel', serif;
+        }
+        
+        .font-runic {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.2em;
+        }
+        
+        /* Runic Background */
+        .runic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #a8dadc;
+            overflow: hidden;
+        }
+        
+        .glass-card-norse {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.2), rgba(0, 0, 0, 0.3));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 218, 220, 0.2);
+            box-shadow: 0 8px 32px rgba(30, 60, 114, 0.3);
+        }
+        
+        .glass-card-norse:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.15);
+        }
+        
+        /* Frost Effect */
+        .frost-border {
+            position: relative;
+        }
+        
+        .frost-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #1e3c72, #a8dadc, #1e3c72);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .frost-border:hover::before {
+            opacity: 0.5;
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1e3c72, #a8dadc);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0e1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #1e3c72, #a8dadc);
+            border-radius: 5px;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Runic Background -->
+    <div class="runic-bg" id="runic-container"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card-norse border-b border-blue-500/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-sm uppercase tracking-widest hover:text-blue-400 transition-colors">Home</a>
+                    <a href="INDIAN_EPICS.html" class="nav-link text-sm uppercase tracking-widest hover:text-blue-400 transition-colors">Indian</a>
+                    <a href="GREEK_MYTHOLOGY.html" class="nav-link text-sm uppercase tracking-widest hover:text-blue-400 transition-colors">Greek</a>
+                    <a href="NORSE_LEGENDS.html" class="nav-link text-sm uppercase tracking-widest text-blue-400">Norse</a>
+                    <a href="JAPANESE_MYTHS.html" class="nav-link text-sm uppercase tracking-widest hover:text-blue-400 transition-colors">Japanese</a>
+                    <a href="EGYPTIAN_MYTHS.html" class="nav-link text-sm uppercase tracking-widest hover:text-blue-400 transition-colors">Egyptian</a>
+                </div>
+
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-blue-900/40 via-black to-black"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1514539079130-25950c84af65?w=1920&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-6 inline-block reveal">
+                <span class="px-4 py-1 rounded-full border border-blue-400/50 text-blue-400 text-xs uppercase tracking-[0.3em] bg-blue-400/10 font-runic">
+                    NORRÆN GOÐAFRÆÐI
+                </span>
+            </div>
+            
+            <h1 class="font-mythology text-6xl md:text-8xl font-bold mb-6 leading-tight reveal">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-200 to-blue-400">
+                    Norse Legends
+                </span>
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-blue-200/60 font-runic mb-8 reveal">
+                "From the halls of Valhalla to the twilight of the gods"
+            </p>
+            
+            <p class="max-w-3xl mx-auto text-lg text-gray-300 mb-12 leading-relaxed reveal">
+                Journey through the Nine Realms. Witness the wisdom of Odin, the thunder of Thor, and the 
+                inevitable Ragnarök. These are the sagas that inspired Tolkien, Wagner, and modern fantasy.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <a href="#aesir" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full font-semibold text-white hover:scale-105 transition-transform">
+                    The Æsir
+                </a>
+                <a href="#realms" class="px-8 py-3 glass-card-norse rounded-full font-semibold hover:border-cyan-400/50 transition-all">
+                    Nine Realms
+                </a>
+                <a href="#ragnarok" class="px-8 py-3 glass-card-norse rounded-full font-semibold hover:border-cyan-400/50 transition-all">
+                    Ragnarök
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Æsir Section -->
+    <section id="aesir" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-mythology text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                    The Æsir Gods
+                </h2>
+                <p class="text-gray-400">The principal pantheon of Norse mythology</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Odin -->
+                <div class="frost-border glass-card-norse rounded-2xl p-6 reveal">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-600 to-gray-800 flex items-center justify-center text-4xl">
+                        🐦‍⬛
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-center text-blue-400 mb-2">Odin</h3>
+                    <p class="text-cyan-400 text-sm text-center mb-4">The Allfather</p>
+                    <p class="text-gray-300 text-sm">
+                        God of wisdom, poetry, death, divination, and magic. He sacrificed his eye at Mímir's well 
+                        and hung himself from Yggdrasil for nine days to gain knowledge of the runes.
+                    </p>
+                    <div class="mt-4 flex gap-2 justify-center flex-wrap">
+                        <span class="px-2 py-1 bg-blue-500/20 rounded text-xs">Huginn & Muninn</span>
+                        <span class="px-2 py-1 bg-blue-500/20 rounded text-xs">Gungnir</span>
+                    </div>
+                </div>
+
+                <!-- Thor -->
+                <div class="frost-border glass-card-norse rounded-2xl p-6 reveal">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-600 to-orange-600 flex items-center justify-center text-4xl">
+                        🔨
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-center text-red-400 mb-2">Thor</h3>
+                    <p class="text-cyan-400 text-sm text-center mb-4">God of Thunder</p>
+                    <p class="text-gray-300 text-sm">
+                        Protector of mankind, god of thunder, lightning, storms, and strength. Wields Mjölnir, 
+                        the hammer that always returns to his hand. The most popular god among common people.
+                    </p>
+                    <div class="mt-4 flex gap-2 justify-center flex-wrap">
+                        <span class="px-2 py-1 bg-red-500/20 rounded text-xs">Mjölnir</span>
+                        <span class="px-2 py-1 bg-red-500/20 rounded text-xs">Jörmungandr</span>
+                    </div>
+                </div>
+
+                <!-- Loki -->
+                <div class="frost-border glass-card-norse rounded-2xl p-6 reveal">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-600 to-emerald-800 flex items-center justify-center text-4xl">
+                        🐍
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-center text-green-400 mb-2">Loki</h3>
+                    <p class="text-cyan-400 text-sm text-center mb-4">The Trickster</p>
+                    <p class="text-gray-300 text-sm">
+                        Shape-shifter, trickster, and father of monsters. Neither fully god nor giant, 
+                        Loki's schemes bring both help and ruin to the gods, ultimately leading to Ragnarök.
+                    </p>
+                    <div class="mt-4 flex gap-2 justify-center flex-wrap">
+                        <span class="px-2 py-1 bg-green-500/20 rounded text-xs">Sleipnir's Mother</span>
+                        <span class="px-2 py-1 bg-green-500/20 rounded text-xs">Father of Lies</span>
+                    </div>
+                </div>
+
+                <!-- Frigg -->
+                <div class="frost-border glass-card-norse rounded-2xl p-6 reveal">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center text-4xl">
+                        🪶
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-center text-purple-400 mb-2">Frigg</h3>
+                    <p class="text-cyan-400 text-sm text-center mb-4">Queen of Asgard</p>
+                    <p class="text-gray-300 text-sm">
+                        Wife of Odin, goddess of marriage, motherhood, and prophecy. She knows all fates but 
+                        never reveals them. The only one allowed to sit in Odin's high seat Hliðskjálf.
+                    </p>
+                </div>
+
+                <!-- Tyr -->
+                <div class="frost-border glass-card-norse rounded-2xl p-6 reveal">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-4xl">
+                        ⚔️
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-center text-gray-300 mb-2">Týr</h3>
+                    <p class="text-cyan-400 text-sm text-center mb-4">God of War</p>
+                    <p class="text-gray-300 text-sm">
+                        The one-handed god of war and heroic glory. Sacrificed his hand to bind the wolf 
+                        Fenrir. Represents law, justice, and oaths.
+                    </p>
+                </div>
+
+                <!-- Baldr -->
+                <div class="frost-border glass-card-norse rounded-2xl p-6 reveal">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-300 to-white flex items-center justify-center text-4xl">
+                        ☀️
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-center text-yellow-200 mb-2">Baldr</h3>
+                    <p class="text-cyan-400 text-sm text-center mb-4">God of Light</p>
+                    <p class="text-gray-300 text-sm">
+                        The most beloved of the gods, so beautiful that light shines from him. His death 
+                        at the hands of Loki marks the beginning of the end times.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nine Realms -->
+    <section id="realms" class="py-24 bg-gradient-to-b from-black to-blue-950/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-mythology text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
+                    The Nine Realms
+                </h2>
+                <p class="text-gray-400">Universes connected by Yggdrasil, the World Tree</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-yellow-400 mb-2">Asgard</h4>
+                    <p class="text-sm text-gray-400">Realm of the Æsir gods, home of Valhalla</p>
+                </div>
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-green-400 mb-2">Midgard</h4>
+                    <p class="text-sm text-gray-400">Earth, realm of humans</p>
+                </div>
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-blue-400 mb-2">Jötunheim</h4>
+                    <p class="text-sm text-gray-400">Land of the giants</p>
+                </div>
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-red-400 mb-2">Muspelheim</h4>
+                    <p class="text-sm text-gray-400">Realm of fire, home of Surtr</p>
+                </div>
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-cyan-400 mb-2">Niflheim</h4>
+                    <p class="text-sm text-gray-400">Realm of ice, mist, and cold</p>
+                </div>
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-purple-400 mb-2">Helheim</h4>
+                    <p class="text-sm text-gray-400">Realm of the dead, ruled by Hel</p>
+                </div>
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-emerald-400 mb-2">Alfheim</h4>
+                    <p class="text-sm text-gray-400">Land of the light elves</p>
+                </div>
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-gray-400 mb-2">Svartalfheim</h4>
+                    <p class="text-sm text-gray-400">Land of the dwarves</p>
+                </div>
+                <div class="glass-card-norse rounded-xl p-6 reveal">
+                    <h4 class="font-mythology text-xl text-pink-400 mb-2">Vanaheim</h4>
+                    <p class="text-sm text-gray-400">Realm of the Vanir gods</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-blue-500/20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </div>
+                
+                <div class="flex gap-6 text-sm text-gray-400">
+                    <a href="index.html" class="hover:text-blue-400 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-blue-400 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-blue-400 transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-xs text-gray-600">
+                <p>© 2024 Mythos. Skål to the old gods.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Generate runic background
+        const runicContainer = document.getElementById('runic-container');
+        const runes = 'ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ';
+        for (let i = 0; i < 100; i++) {
+            const span = document.createElement('span');
+            span.textContent = runes[Math.floor(Math.random() * runes.length)];
+            span.style.position = 'absolute';
+            span.style.left = Math.random() * 100 + '%';
+            span.style.top = Math.random() * 100 + '%';
+            span.style.opacity = Math.random() * 0.5;
+            span.style.transform = `rotate(${Math.random() * 360}deg)`;
+            runicContainer.appendChild(span);
+        }
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90');
+            } else {
+                navbar.classList.remove('bg-black/90');
+            }
+        });
+    </script>
+</body>
+</html>

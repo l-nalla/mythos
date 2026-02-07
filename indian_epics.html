@@ -1,0 +1,903 @@
+<!-- INDIAN_EPICS.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Epics | Mythos - Mahabharata, Ramayana & Sacred Texts</title>
+    <meta name="description" content="Explore the rich mythology of India. Discover the Mahabharata, Ramayana, Bhagavad Gita, and tales of Shiva, Vishnu, and Devi.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            --saffron: #FF9933;
+            --white: #FFFFFF;
+            --green: #138808;
+            --gold: #FFD700;
+            --deep-orange: #FF6B35;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0500;
+            color: #fff8f0;
+            overflow-x: hidden;
+        }
+        
+        .font-mythology {
+            font-family: 'Cinzel', serif;
+        }
+        
+        .font-sanskrit {
+            font-family: 'Tiro Devanagari Sanskrit', serif;
+        }
+        
+        .font-anime {
+            font-family: 'Noto Serif JP', serif;
+        }
+        
+        /* Sacred Geometry Background */
+        .sacred-geometry {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 20% 50%, #FF9933 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, #FF6B35 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, #FFD700 0%, transparent 40%);
+        }
+        
+        .mandala {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border: 1px solid rgba(255, 153, 51, 0.2);
+            border-radius: 50%;
+            animation: rotate 60s linear infinite;
+        }
+        
+        .mandala:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            animation-direction: reverse;
+            animation-duration: 40s;
+        }
+        
+        .mandala:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            animation-duration: 20s;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Glass Cards with Indian Theme */
+        .glass-card-indian {
+            background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(255, 107, 53, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 153, 51, 0.2);
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.2);
+        }
+        
+        .glass-card-indian:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+        }
+        
+        /* Om Symbol Animation */
+        .om-symbol {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #FF9933, #FFD700, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        
+        /* Story Cards */
+        .story-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+        
+        .story-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(255, 107, 53, 0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .story-card:hover::before {
+            opacity: 1;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        /* Dharma Wheel */
+        .dharma-wheel {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #FF9933;
+            border-radius: 50%;
+            position: relative;
+            animation: spin 20s linear infinite;
+        }
+        
+        .dharma-wheel::before,
+        .dharma-wheel::after {
+            content: '';
+            position: absolute;
+            border: 2px solid #FF9933;
+            border-radius: 50%;
+        }
+        
+        .dharma-wheel::before {
+            inset: 10px;
+        }
+        
+        .dharma-wheel::after {
+            inset: 20px;
+        }
+        
+        .spoke {
+            position: absolute;
+            width: 2px;
+            height: 50%;
+            background: #FF9933;
+            left: 50%;
+            transform-origin: bottom;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FF9933, #FFD700);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Quote Block */
+        .shloka {
+            font-family: 'Tiro Devanagari Sanskrit', serif;
+            font-size: 1.5rem;
+            line-height: 2;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* Character Cards */
+        .character-card {
+            background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(19, 136, 8, 0.1));
+            border: 1px solid rgba(255, 153, 51, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+            border-color: #FFD700;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0500;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #FF9933, #FFD700);
+            border-radius: 5px;
+        }
+        
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Sacred Geometry Background -->
+    <div class="sacred-geometry">
+        <div class="mandala" style="top: -200px; right: -200px;"></div>
+        <div class="mandala" style="bottom: -100px; left: -100px;"></div>
+        <div class="mandala" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card-indian border-b border-orange-500/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-yellow-500 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">
+                        MYTHOS
+                    </span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-sm uppercase tracking-widest hover:text-orange-400 transition-colors">Home</a>
+                    <a href="INDIAN_EPICS.html" class="nav-link text-sm uppercase tracking-widest text-orange-400">Indian Epics</a>
+                    <a href="GREEK_MYTHOLOGY.html" class="nav-link text-sm uppercase tracking-widest hover:text-orange-400 transition-colors">Greek</a>
+                    <a href="NORSE_LEGENDS.html" class="nav-link text-sm uppercase tracking-widest hover:text-orange-400 transition-colors">Norse</a>
+                    <a href="JAPANESE_MYTHS.html" class="nav-link text-sm uppercase tracking-widest hover:text-orange-400 transition-colors">Japanese</a>
+                    <a href="EGYPTIAN_MYTHS.html" class="nav-link text-sm uppercase tracking-widest hover:text-orange-400 transition-colors">Egyptian</a>
+                </div>
+
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-orange-900/30 via-black to-black"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1561361058-4c7e76622863?w=1920&q=80')] bg-cover bg-center opacity-30 mix-blend-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-8 reveal">
+                <div class="om-symbol font-sanskrit">ॐ</div>
+            </div>
+            
+            <div class="mb-6 inline-block reveal">
+                <span class="px-4 py-1 rounded-full border border-orange-400/50 text-orange-400 text-xs uppercase tracking-[0.3em] bg-orange-400/10">
+                    भारतीय इतिहास
+                </span>
+            </div>
+            
+            <h1 class="font-mythology text-6xl md:text-8xl font-bold mb-6 leading-tight reveal">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-400 to-orange-600">
+                    Indian Epics
+                </span>
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-orange-200 mb-8 font-sanskrit reveal">
+                सत्यमेव जयते
+            </p>
+            
+            <p class="max-w-3xl mx-auto text-lg text-gray-300 mb-12 leading-relaxed reveal">
+                Journey through the world's longest epic poems. Discover the eternal wisdom of the 
+                Bhagavad Gita, the heroism of the Ramayana, and the cosmic dance of Shiva. 
+                Stories that have guided billions for over 5,000 years.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <a href="#mahabharata" class="px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-400 rounded-full font-semibold text-black hover:scale-105 transition-transform">
+                    Mahabharata
+                </a>
+                <a href="#ramayana" class="px-8 py-3 glass-card-indian rounded-full font-semibold hover:border-yellow-400/50 transition-all">
+                    Ramayana
+                </a>
+                <a href="#puranas" class="px-8 py-3 glass-card-indian rounded-full font-semibold hover:border-yellow-400/50 transition-all">
+                    Puranas
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Featured Shloka -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 text-center reveal">
+            <div class="glass-card-indian rounded-3xl p-12 relative">
+                <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                    <div class="dharma-wheel mx-auto">
+                        <div class="spoke" style="transform: translateX(-50%) rotate(0deg);"></div>
+                        <div class="spoke" style="transform: translateX(-50%) rotate(45deg);"></div>
+                        <div class="spoke" style="transform: translateX(-50%) rotate(90deg);"></div>
+                        <div class="spoke" style="transform: translateX(-50%) rotate(135deg);"></div>
+                        <div class="spoke" style="transform: translateX(-50%) rotate(180deg);"></div>
+                        <div class="spoke" style="transform: translateX(-50%) rotate(225deg);"></div>
+                        <div class="spoke" style="transform: translateX(-50%) rotate(270deg);"></div>
+                        <div class="spoke" style="transform: translateX(-50%) rotate(315deg);"></div>
+                    </div>
+                </div>
+                
+                <p class="shloka mb-6 mt-8">
+                    यदा यदा हि धर्मस्य ग्लानिर्भवति भारत ।<br>
+                    अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम् ॥
+                </p>
+                
+                <p class="text-gray-400 italic mb-4">
+                    "Whenever there is decay of righteousness, O Bharata,<br>
+                    And there is exaltation of unrighteousness, then I Myself come forth."
+                </p>
+                
+                <p class="text-orange-400 text-sm font-semibold">— Bhagavad Gita 4.7</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mahabharata Section -->
+    <section id="mahabharata" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+                <div class="reveal">
+                    <div class="inline-block px-4 py-1 rounded-full bg-orange-500/20 text-orange-400 text-sm mb-4">
+                        The Great Epic of India
+                    </div>
+                    <h2 class="font-mythology text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
+                        Mahabharata
+                    </h2>
+                    <p class="text-2xl text-orange-200/60 font-sanskrit mb-6">महाभारत</p>
+                    
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <p>
+                            With 100,000 couplets, the Mahabharata is the longest epic poem ever written—
+                            ten times the length of the Iliad and Odyssey combined. Composed by Vyasa around 
+                            400 BCE, it tells the story of the Kurukshetra War between the Pandavas and Kauravas.
+                        </p>
+                        <p>
+                            Yet it is far more than a war story. Within its pages lies the Bhagavad Gita, 
+                            the sacred dialogue between Arjuna and Krishna that forms the spiritual foundation 
+                            of Hindu philosophy. It explores duty (dharma), righteousness, and the nature of reality.
+                        </p>
+                        <p>
+                            The epic begins with the conflict between two sets of cousins over the throne of 
+                            Hastinapura. What follows is a complex narrative of love, betrayal, divine intervention, 
+                            and ultimate liberation.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+                        <div class="glass-card-indian rounded-xl p-4">
+                            <div class="text-2xl font-bold text-orange-400">100K</div>
+                            <div class="text-xs text-gray-500">Verses</div>
+                        </div>
+                        <div class="glass-card-indian rounded-xl p-4">
+                            <div class="text-2xl font-bold text-orange-400">18</div>
+                            <div class="text-xs text-gray-500">Parvas</div>
+                        </div>
+                        <div class="glass-card-indian rounded-xl p-4">
+                            <div class="text-2xl font-bold text-orange-400">~400</div>
+                            <div class="text-xs text-gray-500">BCE</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative reveal">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-orange-500/30 to-yellow-500/30 rounded-2xl blur-xl"></div>
+                    <div class="relative glass-card-indian rounded-2xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1561361058-4c7e76622863?w=800&q=80" 
+                             alt="Kurukshetra War" 
+                             class="w-full h-96 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <p class="font-mythology text-xl text-white">The Battle of Dharma</p>
+                            <p class="text-sm text-orange-300">Kurukshetra, the field of righteousness</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Stories from Mahabharata -->
+            <h3 class="font-mythology text-3xl font-bold mb-8 text-center reveal">Sacred Stories</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Story 1 -->
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('gita')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1566008885218-90abf9200ddb?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Bhagavad Gita">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="px-2 py-1 bg-orange-500/80 rounded text-xs">Spiritual</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-orange-400">The Bhagavad Gita</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Krishna's divine discourse to Arjuna on the battlefield. The ultimate guide to 
+                            living a life of purpose without attachment.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">18 Chapters</span>
+                            <span class="text-orange-400 text-sm group-hover:translate-x-2 transition-transform">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Story 2 -->
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('draupadi')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Draupadi">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="px-2 py-1 bg-pink-500/80 rounded text-xs">Epic</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-orange-400">The Disrobing of Draupadi</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            The moment that sparked the great war. When Draupadi's honor was challenged, 
+                            Krishna's divine intervention saved her.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">Game of Dice</span>
+                            <span class="text-orange-400 text-sm group-hover:translate-x-2 transition-transform">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Story 3 -->
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('eklavya')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Eklavya">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="px-2 py-1 bg-blue-500/80 rounded text-xs">Tragic</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-orange-400">Eklavya's Sacrifice</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            The tribal prince who surpassed Arjuna in archery. His devotion to his guru 
+                            cost him his thumb, but earned him eternal fame.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">Guru Drona</span>
+                            <span class="text-orange-400 text-sm group-hover:translate-x-2 transition-transform">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Story 4 -->
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('karna')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Karna">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="px-2 py-1 bg-yellow-500/80 rounded text-xs">Tragic Hero</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-orange-400">Karna: The Tragic Hero</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Born to the Sun God but raised by a charioteer. The most generous warrior 
+                            who was cursed to forget his knowledge when he needed it most.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">Kavach & Kundal</span>
+                            <span class="text-orange-400 text-sm group-hover:translate-x-2 transition-transform">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Story 5 -->
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('bhishma')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Bhishma">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="px-2 py-1 bg-purple-500/80 rounded text-xs">Vow</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-orange-400">Bhishma's Vow</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Devavrata's terrible oath of celibacy to ensure his father's happiness. 
+                            The vow that made him Bhishma—the terrible one.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">Devavrata</span>
+                            <span class="text-orange-400 text-sm group-hover:translate-x-2 transition-transform">Read →</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Story 6 -->
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('abhimanyu')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Abhimanyu">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="px-2 py-1 bg-red-500/80 rounded text-xs">Warrior</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-orange-400">Abhimanyu & The Chakravyuh</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            The young prince who knew how to enter the impenetrable formation but not exit. 
+                            His sacrifice turned the tide of the war.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-500">Chakravyuh</span>
+                            <span class="text-orange-400 text-sm group-hover:translate-x-2 transition-transform">Read →</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ramayana Section -->
+    <section id="ramayana" class="py-24 bg-gradient-to-b from-black to-orange-950/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+                <div class="order-2 lg:order-1 relative reveal">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-green-500/30 to-orange-500/30 rounded-2xl blur-xl"></div>
+                    <div class="relative glass-card-indian rounded-2xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800&q=80" 
+                             alt="Rama and Sita" 
+                             class="w-full h-96 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <p class="font-mythology text-xl text-white">The Journey of Virtue</p>
+                            <p class="text-sm text-green-400">Maryada Purushottam Rama</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 reveal">
+                    <div class="inline-block px-4 py-1 rounded-full bg-green-500/20 text-green-400 text-sm mb-4">
+                        The Ideal Man's Journey
+                    </div>
+                    <h2 class="font-mythology text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-orange-400">
+                        Ramayana
+                    </h2>
+                    <p class="text-2xl text-green-200/60 font-sanskrit mb-6">रामायण</p>
+                    
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <p>
+                            The Ramayana, composed by Valmiki, tells the story of Prince Rama—the ideal man, 
+                            the perfect king, the devoted husband. When the demon king Ravana abducts his wife Sita, 
+                            Rama embarks on an epic journey to rescue her, aided by an army of monkeys and bears.
+                        </p>
+                        <p>
+                            Unlike the Mahabharata's complexity, the Ramayana presents clear moral dichotomies. 
+                            Rama represents dharma (righteousness), while Ravana represents adharma (unrighteousness). 
+                            Yet even Ravana is portrayed with depth—a scholar, a devotee of Shiva, a king who fell 
+                            to his own ego.
+                        </p>
+                        <p>
+                            The epic has been retold countless times across Asia—in Thailand's Ramakien, 
+                            Indonesia's Kakawin Ramayana, and the Philippines' Maharadia Lawana. It remains 
+                            a living tradition performed annually in the Ramlila.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+                        <div class="glass-card-indian rounded-xl p-4">
+                            <div class="text-2xl font-bold text-green-400">24K</div>
+                            <div class="text-xs text-gray-500">Verses</div>
+                        </div>
+                        <div class="glass-card-indian rounded-xl p-4">
+                            <div class="text-2xl font-bold text-green-400">7</div>
+                            <div class="text-xs text-gray-500">Kandas</div>
+                        </div>
+                        <div class="glass-card-indian rounded-xl p-4">
+                            <div class="text-2xl font-bold text-green-400">~500</div>
+                            <div class="text-xs text-gray-500">BCE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ramayana Stories -->
+            <h3 class="font-mythology text-3xl font-bold mb-8 text-center reveal">Episodes from the Ramayana</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('sita-haran')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Sita Haran">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-green-400">The Abduction of Sita</h4>
+                        <p class="text-gray-400 text-sm">
+                            The golden deer, the Lakshman Rekha, and the ten-headed king's chariot 
+                            rising into the sky.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('hanuman')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Hanuman">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-orange-400">Hanuman's Leap</h4>
+                        <p class="text-gray-400 text-sm">
+                            The monkey god's journey across the ocean to Lanka, burning the city 
+                            with his tail, bringing hope to captive Sita.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="story-card glass-card-indian rounded-2xl overflow-hidden cursor-pointer group" onclick="openStory('ravana')">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=600&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+                             alt="Ravana">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mythology text-xl font-bold mb-2 text-red-400">Ravana: The Demon King</h4>
+                        <p class="text-gray-400 text-sm">
+                            Scholar of the Vedas, master of the veena, devotee of Shiva—how did 
+                            the greatest king become the greatest villain?
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deities Section -->
+    <section id="puranas" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-mythology text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+                    The Trimurti & Divine Beings
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Explore the Puranas—ancient texts that tell the stories of gods, goddesses, 
+                    and the creation of the universe.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Brahma -->
+                <div class="character-card rounded-2xl p-6 text-center reveal">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-400 to-pink-600 flex items-center justify-center text-4xl">
+                        🕉️
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-red-400 mb-2">Brahma</h3>
+                    <p class="text-pink-300 text-sm mb-4">The Creator</p>
+                    <p class="text-gray-400 text-sm">
+                        Born from the cosmic lotus emerging from Vishnu's navel. The four-headed 
+                        creator of the universe, though rarely worshipped today.
+                    </p>
+                </div>
+
+                <!-- Vishnu -->
+                <div class="character-card rounded-2xl p-6 text-center reveal">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center text-4xl">
+                        🌊
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-blue-400 mb-2">Vishnu</h3>
+                    <p class="text-cyan-300 text-sm mb-4">The Preserver</p>
+                    <p class="text-gray-400 text-sm">
+                        The maintainer of cosmic order. When evil rises, he descends as avatars—
+                        Rama, Krishna, Buddha—to restore balance.
+                    </p>
+                </div>
+
+                <!-- Shiva -->
+                <div class="character-card rounded-2xl p-6 text-center reveal">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-400 to-purple-600 flex items-center justify-center text-4xl">
+                        🔱
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-purple-400 mb-2">Shiva</h3>
+                    <p class="text-purple-300 text-sm mb-4">The Destroyer</p>
+                    <p class="text-gray-400 text-sm">
+                        The ascetic god of destruction and transformation. His dance creates and 
+                        dissolves worlds. The ultimate reality beyond form.
+                    </p>
+                </div>
+
+                <!-- Devi -->
+                <div class="character-card rounded-2xl p-6 text-center reveal">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400 to-red-600 flex items-center justify-center text-4xl">
+                        ⚡
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-yellow-400 mb-2">Devi</h3>
+                    <p class="text-orange-300 text-sm mb-4">The Divine Mother</p>
+                    <p class="text-gray-400 text-sm">
+                        The supreme goddess in her many forms—Parvati, Lakshmi, Saraswati, 
+                        Kali, Durga. The shakti (power) that animates the universe.
+                    </p>
+                </div>
+
+                <!-- Ganesha -->
+                <div class="character-card rounded-2xl p-6 text-center reveal">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-400 to-yellow-600 flex items-center justify-center text-4xl">
+                        🐘
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-orange-400 mb-2">Ganesha</h3>
+                    <p class="text-yellow-300 text-sm mb-4">Remover of Obstacles</p>
+                    <p class="text-gray-400 text-sm">
+                        The elephant-headed god, son of Shiva and Parvati. Invoked at the 
+                        beginning of all ventures. The scribe of the Mahabharata.
+                    </p>
+                </div>
+
+                <!-- Hanuman -->
+                <div class="character-card rounded-2xl p-6 text-center reveal">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-4xl">
+                        🐒
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-orange-500 mb-2">Hanuman</h3>
+                    <p class="text-red-300 text-sm mb-4">The Devoted Servant</p>
+                    <p class="text-gray-400 text-sm">
+                        The monkey god of strength, devotion, and discipline. His unwavering 
+                        love for Rama makes him the ideal bhakta (devotee).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section class="py-24 bg-gradient-to-b from-orange-950/30 to-black">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="font-mythology text-4xl font-bold mb-8 text-orange-400">Sacred Soundscapes</h2>
+            
+            <div class="glass-card-indian rounded-2xl p-8">
+                <p class="text-gray-300 mb-6">
+                    Enhance your reading experience with traditional Indian classical music. 
+                    Each raga is associated with specific times of day and emotional moods.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button onclick="playRaga('bhairavi')" class="p-4 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 transition-colors text-left">
+                        <div class="text-orange-400 font-bold">Raag Bhairavi</div>
+                        <div class="text-xs text-gray-500">Morning devotion</div>
+                    </button>
+                    <button onclick="playRaga('yaman')" class="p-4 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 transition-colors text-left">
+                        <div class="text-orange-400 font-bold">Raag Yaman</div>
+                        <div class="text-xs text-gray-500">Evening contemplation</div>
+                    </button>
+                    <button onclick="playRaga('darbari')" class="p-4 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 transition-colors text-left">
+                        <div class="text-orange-400 font-bold">Raag Darbari</div>
+                        <div class="text-xs text-gray-500">Late night depth</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-orange-500/20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-yellow-500 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </div>
+                
+                <div class="flex gap-6 text-sm text-gray-400">
+                    <a href="index.html" class="hover:text-orange-400 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-orange-400 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-orange-400 transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-xs text-gray-600">
+                <p>© 2024 Mythos. Celebrating the wisdom of ancient India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Story Navigation
+        function openStory(storyId) {
+            // In production, this would navigate to individual story pages
+            alert(`Opening ${storyId} story... (In production, this navigates to ${storyId}.html)`);
+        }
+
+        // Music Player
+        function playRaga(ragaName) {
+            const ragaNames = {
+                'bhairavi': 'Raag Bhairavi - Morning Devotion',
+                'yaman': 'Raag Yaman - Evening Contemplation',
+                'darbari': 'Raag Darbari - Late Night Depth'
+            };
+            alert(`Now playing: ${ragaNames[ragaName]}\n\n(In production, this would play actual audio)`);
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90');
+            } else {
+                navbar.classList.remove('bg-black/90');
+            }
+        });
+    </script>
+</body>
+</html>

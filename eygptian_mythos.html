@@ -1,0 +1,409 @@
+<!-- EGYPTIAN_MYTHS.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egyptian Myths | Mythos - Pharaohs, Gods & Afterlife</title>
+    <meta name="description" content="Discover Egyptian mythology. Explore Ra, Osiris, Anubis, and the mysteries of the afterlife in ancient Egypt.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --egypt-gold: #FFD700;
+            --egypt-lapis: #1E3A8A;
+            --egypt-turquoise: #40E0D0;
+            --egypt-sand: #C2B280;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0805;
+            color: #FFF8DC;
+            overflow-x: hidden;
+        }
+        
+        .font-mythology {
+            font-family: 'Cinzel', serif;
+        }
+        
+        .font-hieroglyph {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.3em;
+        }
+        
+        /* Papyrus Texture */
+        .papyrus-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                #FFD700 2px,
+                #FFD700 4px
+            );
+        }
+        
+        .glass-card-egypt {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(30, 58, 138, 0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.15);
+        }
+        
+        .glass-card-egypt:hover {
+            border-color: rgba(64, 224, 208, 0.5);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.25);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FFD700, #40E0D0);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0805;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #FFD700, #40E0D0);
+            border-radius: 5px;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Ankh Symbol */
+        .ankh {
+            position: relative;
+            width: 40px;
+            height: 60px;
+        }
+        
+        .ankh::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border: 4px solid #FFD700;
+            border-radius: 50%;
+        }
+        
+        .ankh::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 45px;
+            background: #FFD700;
+            box-shadow: -12px 10px 0 #FFD700, 12px 10px 0 #FFD700;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Papyrus Background -->
+    <div class="papyrus-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card-egypt border-b border-yellow-500/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-blue-600 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Home</a>
+                    <a href="INDIAN_EPICS.html" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Indian</a>
+                    <a href="GREEK_MYTHOLOGY.html" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Greek</a>
+                    <a href="NORSE_LEGENDS.html" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Norse</a>
+                    <a href="JAPANESE_MYTHS.html" class="nav-link text-sm uppercase tracking-widest hover:text-yellow-400 transition-colors">Japanese</a>
+                    <a href="EGYPTIAN_MYTHS.html" class="nav-link text-sm uppercase tracking-widest text-yellow-400">Egyptian</a>
+                </div>
+
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-yellow-900/20 via-black to-black"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=1920&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-6 inline-block reveal">
+                <span class="px-4 py-1 rounded-full border border-yellow-400/50 text-yellow-400 text-xs uppercase tracking-[0.3em] bg-yellow-400/10 font-hieroglyph">
+                    MYTHOLOGY OF KEMET
+                </span>
+            </div>
+            
+            <h1 class="font-mythology text-6xl md:text-8xl font-bold mb-6 leading-tight reveal">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-300">
+                    Egyptian Myths
+                </span>
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-yellow-200/60 font-hieroglyph mb-8 reveal">
+                "Life, Prosperity, Health"
+            </p>
+            
+            <p class="max-w-3xl mx-auto text-lg text-gray-300 mb-12 leading-relaxed reveal">
+                Journey to the land of the Nile, where gods walk among mortals and the afterlife 
+                is a journey through Duat. Discover the eternal struggle between order (Ma'at) 
+                and chaos (Isfet).
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <a href="#gods" class="px-8 py-3 bg-gradient-to-r from-yellow-600 to-yellow-400 rounded-full font-semibold text-black hover:scale-105 transition-transform">
+                    The Gods
+                </a>
+                <a href="#afterlife" class="px-8 py-3 glass-card-egypt rounded-full font-semibold hover:border-turquoise-400/50 transition-all">
+                    Afterlife
+                </a>
+                <a href="#myths" class="px-8 py-3 glass-card-egypt rounded-full font-semibold hover:border-turquoise-400/50 transition-all">
+                <a href="#myths" class="px-8 py-3 glass-card-egypt rounded-full font-semibold hover:border-turquoise-400/50 transition-all">
+                    Great Myths
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Major Gods -->
+    <section id="gods" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-mythology text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-turquoise-400">
+                    The Great Ennead
+                </h2>
+                <p class="text-gray-400">The nine principal gods of Heliopolis</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Ra -->
+                <div class="glass-card-egypt rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-4xl">
+                        ☀️
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-yellow-400 mb-1">Ra (Atum)</h3>
+                    <p class="text-turquoise-400 text-sm mb-3">The Sun God</p>
+                    <p class="text-gray-300 text-sm">
+                        The creator god and king of the gods. He sails across the sky by day and 
+                        through the underworld by night. Combined with Amun as Amun-Ra.
+                    </p>
+                </div>
+
+                <!-- Osiris -->
+                <div class="glass-card-egypt rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-600 to-emerald-800 flex items-center justify-center text-4xl">
+                        👑
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-green-400 mb-1">Osiris</h3>
+                    <p class="text-turquoise-400 text-sm mb-3">God of the Afterlife</p>
+                    <p class="text-gray-300 text-sm">
+                        Murdered by his brother Set, resurrected by Isis. Judge of the dead and 
+                        lord of the underworld. Symbol of resurrection and eternal life.
+                    </p>
+                </div>
+
+                <!-- Isis -->
+                <div class="glass-card-egypt rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center text-4xl">
+                        👑
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-blue-400 mb-1">Isis</h3>
+                    <p class="text-turquoise-400 text-sm mb-3">Goddess of Magic</p>
+                    <p class="text-gray-300 text-sm">
+                        Wife of Osiris, mother of Horus. The most powerful magician who resurrected 
+                        Osiris and protected Horus. Symbol of motherhood and fidelity.
+                    </p>
+                </div>
+
+                <!-- Anubis -->
+                <div class="glass-card-egypt rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-800 to-black flex items-center justify-center text-4xl">
+                        🐺
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-gray-400 mb-1">Anubis</h3>
+                    <p class="text-turquoise-400 text-sm mb-3">Guardian of the Dead</p>
+                    <p class="text-gray-300 text-sm">
+                        The jackal-headed god who mummified Osiris. He weighs the hearts of the dead 
+                        against the feather of Ma'at in the Hall of Two Truths.
+                    </p>
+                </div>
+
+                <!-- Horus -->
+                <div class="glass-card-egypt rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-4xl">
+                        👁️
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-cyan-400 mb-1">Horus</h3>
+                    <p class="text-turquoise-400 text-sm mb-3">God of Kingship</p>
+                    <p class="text-gray-300 text-sm">
+                        The falcon-headed god, son of Osiris and Isis. Avenged his father by defeating 
+                        Set. Each pharaoh was considered the living Horus.
+                    </p>
+                </div>
+
+                <!-- Thoth -->
+                <div class="glass-card-egypt rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-400 to-blue-600 flex items-center justify-center text-4xl">
+                        📝
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-purple-400 mb-1">Thoth</h3>
+                    <p class="text-turquoise-400 text-sm mb-3">God of Wisdom</p>
+                    <p class="text-gray-300 text-sm">
+                        The ibis-headed scribe of the gods, inventor of writing and hieroglyphs. 
+                        He records the results of the weighing of the heart ceremony.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Afterlife Section -->
+    <section id="afterlife" class="py-24 bg-gradient-to-b from-black to-blue-950/20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card-egypt rounded-3xl p-8 md:p-12 reveal">
+                <h2 class="font-mythology text-4xl font-bold text-center mb-8 text-yellow-400">Journey Through the Afterlife</h2>
+                
+                <div class="space-y-6 text-gray-300">
+                    <p>
+                        Death was not the end for ancient Egyptians—it was a journey to the eternal Field of Reeds (Aaru). 
+                        The soul faced many trials in Duat, the underworld, before reaching paradise.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+                        <div class="text-center p-4">
+                            <div class="text-5xl mb-3">⚰️</div>
+                            <h4 class="font-mythology text-lg text-yellow-400 mb-2">Mummification</h4>
+                            <p class="text-sm">Preserving the body for the soul's return. The heart remained; other organs were stored in canopic jars.</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="text-5xl mb-3">⚖️</div>
+                            <h4 class="font-mythology text-lg text-yellow-400 mb-2">Weighing of the Heart</h4>
+                            <p class="text-sm">The heart was weighed against the feather of Ma'at. If lighter, the soul passed; if heavier, it was devoured by Ammit.</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="text-5xl mb-3">🌾</div>
+                            <h4 class="font-mythology text-lg text-yellow-400 mb-2">Field of Reeds</h4>
+                            <p class="text-sm">The eternal paradise where the blessed lived forever, farming and feasting in a perfect version of Egypt.</p>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        The Book of the Dead provided spells and guidance for navigating the underworld, including the 
+                        Negative Confession—a declaration of innocence before 42 judges.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-yellow-500/20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-blue-600 flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </div>
+                
+                <div class="flex gap-6 text-sm text-gray-400">
+                    <a href="index.html" class="hover:text-yellow-400 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-yellow-400 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-yellow-400 transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-xs text-gray-600 font-hieroglyph">
+                <p>© 2024 Mythos. Ankh, Udja, Seneb.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90');
+            } else {
+                navbar.classList.remove('bg-black/90');
+            }
+        });
+    </script>
+</body>
+</html>

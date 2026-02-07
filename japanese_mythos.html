@@ -1,0 +1,487 @@
+<!-- JAPANESE_MYTHS.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Myths | Mythos - Shinto, Kami & Yokai</title>
+    <meta name="description" content="Discover Japanese mythology. Explore Shinto, the Kami spirits, creation myths, and the world of Yokai supernatural beings.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --japan-red: #E63946;
+            --japan-white: #F1FAEE;
+            --japan-black: #1D3557;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #F1FAEE;
+            overflow-x: hidden;
+        }
+        
+        .font-mythology {
+            font-family: 'Cinzel', serif;
+        }
+        
+        .font-japanese {
+            font-family: 'Noto Serif JP', serif;
+        }
+        
+        /* Sakura Petals Animation */
+        .sakura {
+            position: fixed;
+            top: -10%;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(to bottom right, #ffb7b2, #ffdac1);
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.6;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+        
+        .glass-card-japan {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), rgba(29, 53, 87, 0.2));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            box-shadow: 0 8px 32px rgba(230, 57, 70, 0.2);
+        }
+        
+        .glass-card-japan:hover {
+            border-color: rgba(241, 250, 238, 0.5);
+            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #E63946, #F1FAEE);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #E63946, #F1FAEE);
+            border-radius: 5px;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .torii-gate {
+            position: relative;
+            width: 100px;
+            height: 120px;
+        }
+        
+        .torii-gate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: #E63946;
+            border-radius: 5px;
+        }
+        
+        .torii-gate::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: #E63946;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Sakura Petals -->
+    <div id="sakura-container"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card-japan border-b border-red-500/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-white flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-sm uppercase tracking-widest hover:text-red-400 transition-colors">Home</a>
+                    <a href="INDIAN_EPICS.html" class="nav-link text-sm uppercase tracking-widest hover:text-red-400 transition-colors">Indian</a>
+                    <a href="GREEK_MYTHOLOGY.html" class="nav-link text-sm uppercase tracking-widest hover:text-red-400 transition-colors">Greek</a>
+                    <a href="NORSE_LEGENDS.html" class="nav-link text-sm uppercase tracking-widest hover:text-red-400 transition-colors">Norse</a>
+                    <a href="JAPANESE_MYTHS.html" class="nav-link text-sm uppercase tracking-widest text-red-400">Japanese</a>
+                    <a href="EGYPTIAN_MYTHS.html" class="nav-link text-sm uppercase tracking-widest hover:text-red-400 transition-colors">Egyptian</a>
+                </div>
+
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-red-900/20 via-black to-black"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1920&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-6 inline-block reveal">
+                <span class="px-4 py-1 rounded-full border border-red-400/50 text-red-400 text-xs uppercase tracking-[0.3em] bg-red-400/10 font-japanese">
+                    日本神話
+                </span>
+            </div>
+            
+            <h1 class="font-mythology text-6xl md:text-8xl font-bold mb-6 leading-tight reveal">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-white to-red-400">
+                    Japanese Myths
+                </span>
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-red-200/60 font-japanese mb-8 reveal">
+                "八百万の神"
+            </p>
+            <p class="text-lg text-gray-400 font-japanese reveal">Yaoyorozu no Kami - Eight Million Gods</p>
+            
+            <p class="max-w-3xl mx-auto text-lg text-gray-300 mb-12 leading-relaxed reveal">
+                Enter the world of Shinto, where spirits dwell in every mountain, river, and tree. 
+                From the sun goddess Amaterasu to the mischievous yokai, discover the spiritual 
+                heart of Japan.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <a href="#kami" class="px-8 py-3 bg-gradient-to-r from-red-600 to-red-400 rounded-full font-semibold text-white hover:scale-105 transition-transform">
+                    The Kami
+                </a>
+                <a href="#creation" class="px-8 py-3 glass-card-japan rounded-full font-semibold hover:border-white/50 transition-all">
+                    Creation Myth
+                </a>
+                <a href="#yokai" class="px-8 py-3 glass-card-japan rounded-full font-semibold hover:border-white/50 transition-all">
+                    Yokai
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creation Myth -->
+    <section id="creation" class="py-24 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card-japan rounded-3xl p-8 md:p-12 reveal">
+                <h2 class="font-mythology text-4xl font-bold text-center mb-8 text-red-400">The Creation of Japan</h2>
+                
+                <div class="space-y-8 text-gray-300 leading-relaxed">
+                    <p>
+                        In the beginning, there was chaos. From this void emerged the first gods: 
+                        <strong class="text-white">Ame-no-Minakanushi</strong> (Central Master of Heaven), 
+                        followed by Takamimusubi and Kamimusubi. These kami created the islands of Japan.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+                        <div class="text-center">
+                            <div class="text-6xl mb-4">⛩️</div>
+                            <h4 class="font-mythology text-xl text-white mb-2">Izanagi & Izanami</h4>
+                            <p class="text-sm">
+                                The divine couple who stood on the Floating Bridge of Heaven and stirred 
+                                the primordial ocean with a jeweled spear. The drops that fell formed 
+                                the islands of Japan.
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-6xl mb-4">☀️</div>
+                            <h4 class="font-mythology text-xl text-white mb-2">Amaterasu</h4>
+                            <p class="text-sm">
+                                Born from Izanagi's left eye, she became the sun goddess and ancestor 
+                                of the Imperial family. Her light illuminates the world.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        When Izanami died giving birth to the fire god Kagutsuchi, Izanagi descended to 
+                        Yomi (the underworld) to retrieve her. But he broke the taboo of looking at her 
+                        decaying form, sealing the separation between life and death forever.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Major Kami -->
+    <section id="kami" class="py-24 bg-gradient-to-b from-black to-red-950/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-mythology text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-white">
+                    Major Kami
+                </h2>
+                <p class="text-gray-400">The divine spirits of Shinto</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Amaterasu -->
+                <div class="glass-card-japan rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-4xl">
+                        ☀️
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-yellow-400 mb-1">Amaterasu</h3>
+                    <p class="text-red-300 text-sm mb-3 font-japanese">天照大神</p>
+                    <p class="text-gray-300 text-sm">
+                        The sun goddess and most important Shinto deity. Ancestor of the Imperial family. 
+                        Hid in a cave, plunging the world into darkness until lured out by dance.
+                    </p>
+                </div>
+
+                <!-- Susanoo -->
+                <div class="glass-card-japan rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl">
+                        🌊
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-blue-400 mb-1">Susanoo</h3>
+                    <p class="text-red-300 text-sm mb-3 font-japanese">須佐之男命</p>
+                    <p class="text-gray-300 text-sm">
+                        The storm god of the sea. His rivalry with Amaterasu caused chaos until he 
+                        slew the Yamata no Orochi (eight-headed serpent) and redeemed himself.
+                    </p>
+                </div>
+
+                <!-- Tsukuyomi -->
+                <div class="glass-card-japan rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 flex items-center justify-center text-4xl">
+                        🌙
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-gray-300 mb-1">Tsukuyomi</h3>
+                    <p class="text-red-300 text-sm mb-3 font-japanese">月読命</p>
+                    <p class="text-gray-300 text-sm">
+                        The moon god, born from Izanagi's right eye. Killed the goddess of food 
+                        in disgust, causing Amaterasu to separate from him—creating day and night.
+                    </p>
+                </div>
+
+                <!-- Inari -->
+                <div class="glass-card-japan rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-4xl">
+                        🦊
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-orange-400 mb-1">Inari</h3>
+                    <p class="text-red-300 text-sm mb-3 font-japanese">稲荷神</p>
+                    <p class="text-gray-300 text-sm">
+                        God of rice, fertility, tea, sake, and foxes. Served by kitsune (fox spirits). 
+                        One of the most widely worshipped kami, with thousands of shrines.
+                    </p>
+                </div>
+
+                <!-- Hachiman -->
+                <div class="glass-card-japan rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-600 to-gray-800 flex items-center justify-center text-4xl">
+                        🏹
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-red-500 mb-1">Hachiman</h3>
+                    <p class="text-red-300 text-sm mb-3 font-japanese">八幡神</p>
+                    <p class="text-gray-300 text-sm">
+                        God of war and divine protector of Japan. Originally an agricultural deity, 
+                        evolved into a warrior god. Patron of the samurai.
+                    </p>
+                </div>
+
+                <!-- Raijin -->
+                <div class="glass-card-japan rounded-2xl p-6 reveal text-center">
+                    <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center text-4xl">
+                        ⚡
+                    </div>
+                    <h3 class="font-mythology text-2xl font-bold text-purple-400 mb-1">Raijin</h3>
+                    <p class="text-red-300 text-sm mb-3 font-japanese">雷神</p>
+                    <p class="text-gray-300 text-sm">
+                        The thunder god who beats drums to create thunder. Often depicted with 
+                        Fujin (wind god). Feared and respected for his power over storms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Yokai Section -->
+    <section id="yokai" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-mythology text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-red-400">
+                    Yokai - Supernatural Beings
+                </h2>
+                <p class="text-gray-400 font-japanese">妖怪 - Strange apparitions and mysterious phenomena</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card-japan rounded-2xl p-6 reveal">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">👹</div>
+                        <div>
+                            <h4 class="font-mythology text-xl text-red-400 mb-2">Oni</h4>
+                            <p class="text-gray-300 text-sm">
+                                Demonic ogres with horns and tiger-skin loincloths. They guard the gates 
+                                of hell and punish wicked souls. Some can be benevolent protectors.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card-japan rounded-2xl p-6 reveal">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🦊</div>
+                        <div>
+                            <h4 class="font-mythology text-xl text-orange-400 mb-2">Kitsune</h4>
+                            <p class="text-gray-300 text-sm">
+                                Fox spirits with magical abilities. The more tails they have (up to nine), 
+                                the older and more powerful. They serve Inari and can shapeshift into humans.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card-japan rounded-2xl p-6 reveal">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🐱</div>
+                        <div>
+                            <h4 class="font-mythology text-xl text-purple-400 mb-2">Bakeneko</h4>
+                            <p class="text-gray-300 text-sm">
+                                Ghost cats that can speak, shapeshift, and curse humans. When a cat lives 
+                                past 13 years, its tail splits and it becomes a bakeneko.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card-japan rounded-2xl p-6 reveal">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">💀</div>
+                        <div>
+                            <h4 class="font-mythology text-xl text-gray-400 mb-2">Yuki-onna</h4>
+                            <p class="text-gray-300 text-sm">
+                                The snow woman—a beautiful spirit who appears during snowstorms. She freezes 
+                                travelers with her icy breath but sometimes spares those who show kindness.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-red-500/20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-white flex items-center justify-center">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <span class="font-mythology text-2xl font-bold text-white">MYTHOS</span>
+                </div>
+                
+                <div class="flex gap-6 text-sm text-gray-400">
+                    <a href="index.html" class="hover:text-red-400 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-red-400 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-red-400 transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-xs text-gray-600 font-japanese">
+                <p>© 2024 Mythos. ありがとうございました。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create sakura petals
+        const sakuraContainer = document.getElementById('sakura-container');
+        for (let i = 0; i < 30; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'sakura';
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            petal.style.opacity = Math.random() * 0.5 + 0.3;
+            sakuraContainer.appendChild(petal);
+        }
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/90');
+            } else {
+                navbar.classList.remove('bg-black/90');
+            }
+        });
+    </script>
+</body>
+</html>

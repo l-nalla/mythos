@@ -1,0 +1,313 @@
+:root {
+    --primary-gold: #FFD700;
+    --deep-purple: #1a0b2e;
+    --mystic-blue: #0f172a;
+    --sacred-red: #dc2626;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #050505;
+    color: #e5e5e5;
+    overflow-x: hidden;
+}
+
+.font-mythology {
+    font-family: 'Cinzel', serif;
+}
+
+.font-anime {
+    font-family: 'Noto Serif JP', serif;
+}
+
+/* Particle Background */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s infinite ease-in-out;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.3;
+    }
+
+    33% {
+        transform: translateY(-100px) translateX(50px) scale(1.2);
+        opacity: 0.6;
+    }
+
+    66% {
+        transform: translateY(50px) translateX(-30px) scale(0.8);
+        opacity: 0.2;
+    }
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 215, 0, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.1);
+}
+
+/* Anime Glow Effects */
+.anime-glow {
+    position: relative;
+    overflow: hidden;
+}
+
+.anime-glow::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #FFD700, #ff006e, #8338ec, #FFD700);
+    background-size: 400% 400%;
+    z-index: -1;
+    animation: glow 3s ease infinite;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.anime-glow:hover::before {
+    opacity: 1;
+}
+
+@keyframes glow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Text Scramble Effect */
+.scramble-text {
+    display: inline-block;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #FFD700, #ff006e);
+    border-radius: 4px;
+}
+
+/* Music Player */
+.music-player {
+    background: linear-gradient(135deg, rgba(26, 11, 46, 0.9), rgba(15, 23, 42, 0.9));
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.vinyl-spin {
+    animation: spin 4s linear infinite;
+    animation-play-state: paused;
+}
+
+.vinyl-spin.playing {
+    animation-play-state: running;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mythology Category Gradients */
+.gradient-indian {
+    background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD700 100%);
+}
+
+.gradient-greek {
+    background: linear-gradient(135deg, #00C9FF 0%, #92FE9D 50%, #ffffff 100%);
+}
+
+.gradient-norse {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+}
+
+.gradient-egyptian {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B35 100%);
+}
+
+.gradient-japanese {
+    background: linear-gradient(135deg, #E63946 0%, #F1FAEE 50%, #A8DADC 100%);
+}
+
+/* Instagram Grid */
+.insta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.insta-card {
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.insta-card:hover {
+    transform: scale(1.02) rotate(1deg);
+    z-index: 10;
+    box-shadow: 0 25px 50px -12px rgba(255, 215, 0, 0.25);
+}
+
+.insta-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.insta-card:hover .insta-overlay {
+    opacity: 1;
+}
+
+/* Navigation */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #FFD700, #ff006e);
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.modal.active {
+    display: flex;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Audio Visualizer Bars */
+.visualizer-bar {
+    width: 4px;
+    background: linear-gradient(to top, #FFD700, #ff006e);
+    margin: 0 2px;
+    border-radius: 2px;
+    animation: visualize 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes visualize {
+    from {
+        height: 10px;
+    }
+
+    to {
+        height: 40px;
+    }
+}
+
+.playing .visualizer-bar {
+    animation-play-state: running;
+}
+
+.paused .visualizer-bar {
+    animation-play-state: paused;
+}
+
+/* About Section Styles */
+#about {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: #000;
+}
+
+.about-stat {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-stat:hover {
+    border-color: rgba(255, 215, 0, 0.3) !important;
+    background: rgba(255, 215, 0, 0.03) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+#about-bg-img {
+    filter: saturate(0.5) contrast(1.2) brightness(0.7);
+}
+
+@media (max-width: 1024px) {
+    .about-stat {
+        transform: none !important;
+    }
+}
